@@ -9,12 +9,17 @@
 #import "TestModule.h"
 
 @implementation TestModule
-- (void)moduleWillLoad:(TPContext *)context {
-    
-}
-
 - (void)moduleDidLoad:(TPContext *)context {
-    
+    switch (context.env) {
+        case TPRunningEnviromentTypeDebug: {
+            NSLog(@"%@", @"TestModule moduleDidLoad: debug");
+            break;
+        }
+        case TPRunningEnviromentTypeRelease: {
+            NSLog(@"%@", @"TestModule moduleDidLoad: release");
+            break;
+        }
+    }
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {

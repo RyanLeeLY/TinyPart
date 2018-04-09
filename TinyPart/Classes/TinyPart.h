@@ -11,6 +11,7 @@
 #import "TPContext.h"
 #import "TPModuleManager.h"
 #import "TPServiceManager.h"
+#import "TPMediator.h"
 #import "TPAppDelegate.h"
 
 @interface TinyPart : NSObject

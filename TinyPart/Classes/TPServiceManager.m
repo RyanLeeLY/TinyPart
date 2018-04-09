@@ -27,7 +27,15 @@
     if (![impClass conformsToProtocol:proto]) {
         return;
     }
-    [self.servicesDict setObject:impClass forKey:NSStringFromProtocol(proto)];
+    [self registerServiceWithName:NSStringFromProtocol(proto) impClass:impClass];
+}
+
+- (void)registerServiceWithName:(NSString *)name impClass:(Class)impClass {
+    NSParameterAssert(name);
+    if (!name) {
+        return;
+    }
+    [self.servicesDict setObject:impClass forKey:name];
 }
 
 - (id)serviceWithProtocolName:(NSString *)protoName {

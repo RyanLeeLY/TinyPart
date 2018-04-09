@@ -23,6 +23,8 @@
     
     id<TestModuleService2> service2 = [[TPServiceManager sharedInstance] serviceWithProtocolName:@"TestModuleService2"];
     [service2 function2];
+    
+    [[TPMediator sharedInstance] performAction:@"action1" router:@"Test" params:@{}];
 }
 
 

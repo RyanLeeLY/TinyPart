@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "TestModule.h"
 #import "TestModuleService.h"
+#import "TestRouter.h"
 
 @interface AppDelegate ()
 
@@ -24,7 +25,8 @@
     [[TPModuleManager sharedInstance] registerModule:[TestModule class]];
     [[TPServiceManager sharedInstance] registerService:@protocol(TestModuleService1) impClass:[TestModuleService1Imp class]];
     [[TPServiceManager sharedInstance] registerService:@protocol(TestModuleService2) impClass:[TestModuleService2Imp class]];
-
+    [[TPMediator sharedInstance] addRouter:[TestRouter class]];
+    
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 

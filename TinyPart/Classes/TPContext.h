@@ -8,15 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, TPEnviromentType) {
-    TPEnviromentTypeRelease = 0,
-    TPEnviromentTypeDebug,
+typedef NS_ENUM(NSUInteger, TPRunningEnviromentType) {
+    TPRunningEnviromentTypeRelease = 0,
+    TPRunningEnviromentTypeDebug,
 };
 
 @interface TPContext : NSObject
 + (instancetype)sharedContext;
 
-@property(nonatomic, assign) TPEnviromentType env;
+@property(nonatomic, assign) TPRunningEnviromentType env;
 
 @property(nonatomic, strong) UIApplication *application;
 

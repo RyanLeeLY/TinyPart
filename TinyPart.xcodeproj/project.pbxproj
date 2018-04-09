@@ -20,6 +20,9 @@
 		255E31A0207A1595002166CB /* TPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E319F207A1595002166CB /* TPAppDelegate.m */; };
 		255E31A3207B1467002166CB /* TestModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E31A2207B1467002166CB /* TestModule.m */; };
 		255E31A8207B45D5002166CB /* TestModuleService.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E31A7207B45D5002166CB /* TestModuleService.m */; };
+		255E31AB207B4F20002166CB /* TPMediator.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E31AA207B4F20002166CB /* TPMediator.m */; };
+		255E31AE207B52A0002166CB /* TPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E31AD207B52A0002166CB /* TPRouter.m */; };
+		255E31B1207B6585002166CB /* TestRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E31B0207B6585002166CB /* TestRouter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +52,12 @@
 		255E31A5207B3FE7002166CB /* TPServiceProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPServiceProtocol.h; sourceTree = "<group>"; };
 		255E31A6207B45D5002166CB /* TestModuleService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestModuleService.h; sourceTree = "<group>"; };
 		255E31A7207B45D5002166CB /* TestModuleService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestModuleService.m; sourceTree = "<group>"; };
+		255E31A9207B4F20002166CB /* TPMediator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPMediator.h; sourceTree = "<group>"; };
+		255E31AA207B4F20002166CB /* TPMediator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPMediator.m; sourceTree = "<group>"; };
+		255E31AC207B52A0002166CB /* TPRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPRouter.h; sourceTree = "<group>"; };
+		255E31AD207B52A0002166CB /* TPRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPRouter.m; sourceTree = "<group>"; };
+		255E31AF207B6585002166CB /* TestRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestRouter.h; sourceTree = "<group>"; };
+		255E31B0207B6585002166CB /* TestRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestRouter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +95,8 @@
 				255E31792079E607002166CB /* AppDelegate.m */,
 				255E31A1207B1467002166CB /* TestModule.h */,
 				255E31A2207B1467002166CB /* TestModule.m */,
+				255E31AF207B6585002166CB /* TestRouter.h */,
+				255E31B0207B6585002166CB /* TestRouter.m */,
 				255E31A6207B45D5002166CB /* TestModuleService.h */,
 				255E31A7207B45D5002166CB /* TestModuleService.m */,
 				255E317B2079E607002166CB /* ViewController.h */,
@@ -104,6 +115,10 @@
 			children = (
 				255E31922079E63B002166CB /* TinyPart.h */,
 				255E31932079E63B002166CB /* TinyPart.m */,
+				255E31A9207B4F20002166CB /* TPMediator.h */,
+				255E31AA207B4F20002166CB /* TPMediator.m */,
+				255E31AC207B52A0002166CB /* TPRouter.h */,
+				255E31AD207B52A0002166CB /* TPRouter.m */,
 				255E318F2079E62F002166CB /* TPContext.h */,
 				255E31902079E62F002166CB /* TPContext.m */,
 				255E319B2079FE80002166CB /* TPModuleManager.h */,
@@ -190,10 +205,13 @@
 			files = (
 				255E317D2079E607002166CB /* ViewController.m in Sources */,
 				255E319D2079FE80002166CB /* TPModuleManager.m in Sources */,
+				255E31AE207B52A0002166CB /* TPRouter.m in Sources */,
 				255E31A0207A1595002166CB /* TPAppDelegate.m in Sources */,
+				255E31B1207B6585002166CB /* TestRouter.m in Sources */,
 				255E31A8207B45D5002166CB /* TestModuleService.m in Sources */,
 				255E319A2079F8D7002166CB /* TPServiceManager.m in Sources */,
 				255E31882079E608002166CB /* main.m in Sources */,
+				255E31AB207B4F20002166CB /* TPMediator.m in Sources */,
 				255E31942079E63B002166CB /* TinyPart.m in Sources */,
 				255E317A2079E607002166CB /* AppDelegate.m in Sources */,
 				255E31A3207B1467002166CB /* TestModule.m in Sources */,
