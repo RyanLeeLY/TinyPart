@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/RyanLeeLY/TinyPart"
   s.license      = "MIT"
   s.author       = { "yao.li" => "liyao1021@163.com" }
-  s.source       = { :git => "git@github.com:RyanLeeLY/TinyPart.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/RyanLeeLY/TinyPart.git", :tag => "#{s.version}" }
   s.source_files  = "TinyPart/Classes/**/*.{h,m}"
   s.public_header_files = 'TinyPart/Classes/**/*.h'
 
