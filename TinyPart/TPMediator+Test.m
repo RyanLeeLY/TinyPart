@@ -13,6 +13,6 @@
 @implementation TPMediator (Test)
 + (void)load {
     TPURLHostForRouter(@"com.tinypart.test", TestRouter)
-    TPURLPathForActionForRouter(@"/action1", @"action1", TestRouter);
+    TPURLPathForActionForRouter(@"/action1", action1, TestRouter);
 }
 @end

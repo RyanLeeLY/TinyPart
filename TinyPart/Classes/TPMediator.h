@@ -13,8 +13,15 @@
 #define TPURLHostForRouter(host, routerClass) \
 [[TPMediator sharedInstance] addURLHost:host forRouter:[routerClass class]];
 
+#define ClangPush _Pragma("clang diagnostic push")
+#define ClangPop _Pragma("clang diagnostic pop")
+#define ClangDiagnosticUndeclaredSelector _Pragma("clang diagnostic ignored \"-Wundeclared-selector\"")
+
 #define TPURLPathForActionForRouter(path, action, routerClass) \
-[[TPMediator sharedInstance] addURLPath:path forAction:action forRouter:[routerClass class]];
+ClangPush \
+ClangDiagnosticUndeclaredSelector \
+[[TPMediator sharedInstance] addURLPath:path forAction:NSStringFromSelector(@selector(action)) forRouter:[routerClass class]]; \
+ClangPop
 
 static NSString * const TPAppURLScheme = @"tinypart";
 
