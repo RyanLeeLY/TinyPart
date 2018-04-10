@@ -22,3 +22,10 @@
 
 @interface TestModuleService2Imp : NSObject <TestModuleService2>
 @end
+
+@protocol TestModuleService3 <TPServiceProtocol>
+- (void)function3;
+@end
+
+@interface TestModuleService3Imp : NSObject <TestModuleService3>
+@end

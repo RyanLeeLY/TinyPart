@@ -7,22 +7,65 @@
 //
 
 #import "TestModule.h"
+#import "TinyPart.h"
 
-@implementation TestModule
+@implementation TestModule1
+TP_MODULE_AUTO_REGISTER
+
+TP_MODULE_ASYNC
+TP_MODULE_PRIORITY(1)
+
 - (void)moduleDidLoad:(TPContext *)context {
     switch (context.env) {
         case TPRunningEnviromentTypeDebug: {
-            NSLog(@"%@", @"TestModule moduleDidLoad: debug");
+            NSLog(@"%@", @"TestModule1 moduleDidLoad: debug");
             break;
         }
         case TPRunningEnviromentTypeRelease: {
-            NSLog(@"%@", @"TestModule moduleDidLoad: release");
+            NSLog(@"%@", @"TestModule1 moduleDidLoad: release");
             break;
         }
     }
 }
+@end
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    return YES;
+
+
+@implementation TestModule2
+TP_MODULE_AUTO_REGISTER
+
+TP_MODULE_ASYNC
+TP_MODULE_PRIORITY(2)
+
+- (void)moduleDidLoad:(TPContext *)context {
+    switch (context.env) {
+        case TPRunningEnviromentTypeDebug: {
+            NSLog(@"%@", @"TestModule2 moduleDidLoad: debug");
+            break;
+        }
+        case TPRunningEnviromentTypeRelease: {
+            NSLog(@"%@", @"TestModule2 moduleDidLoad: release");
+            break;
+        }
+    }
+}
+@end
+
+
+
+@implementation TestModule3
+TP_MODULE_PRIORITY(100)
+
+- (void)moduleDidLoad:(TPContext *)context {
+    switch (context.env) {
+        case TPRunningEnviromentTypeDebug: {
+            NSLog(@"%@", @"TestModule3 moduleDidLoad: debug");
+            break;
+        }
+        case TPRunningEnviromentTypeRelease: {
+            NSLog(@"%@", @"TestModule3 moduleDidLoad: release");
+            break;
+        }
+    }
 }
 @end

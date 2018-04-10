@@ -24,6 +24,7 @@
 		255E31AE207B52A0002166CB /* TPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E31AD207B52A0002166CB /* TPRouter.m */; };
 		255E31B1207B6585002166CB /* TestRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E31B0207B6585002166CB /* TestRouter.m */; };
 		255E31B4207C5FC8002166CB /* TPMediator+Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E31B3207C5FC8002166CB /* TPMediator+Test.m */; };
+		255E31B6207CA4BD002166CB /* TinyPart.plist in Resources */ = {isa = PBXBuildFile; fileRef = 255E31B5207CA4BD002166CB /* TinyPart.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		255E31B0207B6585002166CB /* TestRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestRouter.m; sourceTree = "<group>"; };
 		255E31B2207C5FC8002166CB /* TPMediator+Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TPMediator+Test.h"; sourceTree = "<group>"; };
 		255E31B3207C5FC8002166CB /* TPMediator+Test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TPMediator+Test.m"; sourceTree = "<group>"; };
+		255E31B5207CA4BD002166CB /* TinyPart.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = TinyPart.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				255E31832079E608002166CB /* LaunchScreen.storyboard */,
 				255E31862079E608002166CB /* Info.plist */,
 				255E31872079E608002166CB /* main.m */,
+				255E31B5207CA4BD002166CB /* TinyPart.plist */,
 			);
 			path = TinyPart;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 			files = (
 				255E31852079E608002166CB /* LaunchScreen.storyboard in Resources */,
 				255E31822079E608002166CB /* Assets.xcassets in Resources */,
+				255E31B6207CA4BD002166CB /* TinyPart.plist in Resources */,
 				255E31802079E607002166CB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

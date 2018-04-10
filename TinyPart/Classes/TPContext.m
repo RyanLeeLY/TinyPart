@@ -17,4 +17,15 @@
     });
     return ContextInstance;
 }
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _plistBundle = [NSBundle mainBundle];
+        _modulePlistFileName = @"TinyPart.plist";
+        _servicePlistFileName = @"TinyPart.plist";
+        _routerPlistFileName = @"TinyPart.plist";
+    }
+    return self;
+}
 @end

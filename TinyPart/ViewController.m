@@ -24,7 +24,10 @@
     id<TestModuleService2> service2 = [[TPServiceManager sharedInstance] serviceWithName:@"TestModuleService2"];
     [service2 function2];
     
-    [[TPMediator sharedInstance] performAction:@"action1" router:@"Test" params:@{}];
+    id<TestModuleService3> service3 = [[TPServiceManager sharedInstance] serviceWithName:@"TestModuleService3"];
+    [service3 function3];
+    
+//    [[TPMediator sharedInstance] performAction:@"action1" router:@"Test" params:@{}];
     [[TPMediator sharedInstance] openURL:[NSURL URLWithString:@"tinypart://com.tinypart.test/action1?id=1&name=tinypart"]];
 }
 

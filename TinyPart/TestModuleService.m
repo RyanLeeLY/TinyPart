@@ -7,14 +7,19 @@
 //
 
 #import "TestModuleService.h"
+#import "TinyPart.h"
 
 @implementation TestModuleService1Imp
+TPSERVICE_AUTO_REGISTER(TestModuleService1)
+
 - (void)function1 {
     NSLog(@"%@", @"TestModuleService1 function1");
 }
 @end
 
 @implementation TestModuleService2Imp
+TPSERVICE_AUTO_REGISTER(TestModuleService2)
+
 + (BOOL)singleton {
     return YES;
 }
@@ -30,5 +35,11 @@
 
 - (void)function2 {
     NSLog(@"%@", @"TestModuleService2 function2");
+}
+@end
+
+@implementation TestModuleService3Imp
+- (void)function3 {
+    NSLog(@"%@", @"TestModuleService3 function3");
 }
 @end

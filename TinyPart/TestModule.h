@@ -7,8 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TinyPart.h"
+#import "TPModuleProtocol.h"
 
-@interface TestModule : NSObject <TPModuleProtocol>
+@interface TestModule1 : NSObject <TPModuleProtocol>
+
+@end
+
+@interface TestModule2 : NSObject <TPModuleProtocol>
+
+@end
+
+@interface TestModule3 : NSObject <TPModuleProtocol>
 
 @end

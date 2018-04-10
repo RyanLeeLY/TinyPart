@@ -14,9 +14,9 @@
 
 @interface TPModuleManager : NSObject <UIApplicationDelegate, UNUserNotificationCenterDelegate>
 
+@property (copy, nonatomic, readonly) NSArray<id<TPModuleProtocol>> *allModules;
+
 + (instancetype)sharedInstance;
 
 - (void)registerModule:(Class)clz;
-
-- (NSArray<id<TPModuleProtocol>> *)allModules;
 @end

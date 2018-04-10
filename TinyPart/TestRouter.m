@@ -7,8 +7,11 @@
 //
 
 #import "TestRouter.h"
+#import "TinyPart.h"
 
 @implementation TestRouter
+//TPROUTER_AUTO_REGISTER
+
 TPRouter_AUTH_REQUIRE(@"action1")
 
 TPROUTER_METHOD_EXPORT(action1, {

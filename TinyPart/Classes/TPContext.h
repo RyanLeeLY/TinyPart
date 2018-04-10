@@ -16,9 +16,14 @@ typedef NS_ENUM(NSUInteger, TPRunningEnviromentType) {
 @interface TPContext : NSObject
 + (instancetype)sharedContext;
 
-@property(nonatomic, assign) TPRunningEnviromentType env;
+@property(assign, nonatomic) TPRunningEnviromentType env;
 
-@property(nonatomic, strong) UIApplication *application;
+@property(strong, nonatomic) UIApplication *application;
 
-@property(nonatomic, strong) NSDictionary *launchOptions;
+@property(strong, nonatomic) NSDictionary *launchOptions;
+
+@property(strong, nonatomic) NSBundle *plistBundle;
+@property(copy, nonatomic) NSString *modulePlistFileName;
+@property(copy, nonatomic) NSString *servicePlistFileName;
+@property(copy, nonatomic) NSString *routerPlistFileName;
 @end

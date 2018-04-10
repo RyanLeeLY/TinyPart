@@ -19,14 +19,11 @@
 @synthesize window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [TPMediator sharedInstance].deleagate = self;
+
     [TPContext sharedContext].launchOptions = launchOptions;
     [TPContext sharedContext].application = application;
     [TinyPart sharedInstance].context = [TPContext sharedContext];
-    [[TPModuleManager sharedInstance] registerModule:[TestModule class]];
-    [TPMediator sharedInstance].deleagate = self;
-    [[TPServiceManager sharedInstance] registerService:@protocol(TestModuleService1) impClass:[TestModuleService1Imp class]];
-    [[TPServiceManager sharedInstance] registerService:@protocol(TestModuleService2) impClass:[TestModuleService2Imp class]];
-    [[TPMediator sharedInstance] addRouter:[TestRouter class]];
     
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }

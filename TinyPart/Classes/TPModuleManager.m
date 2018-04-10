@@ -7,10 +7,14 @@
 //
 
 #import "TPModuleManager.h"
+#import <objc/runtime.h>
 #import "TinyPart.h"
 
 @interface TPModuleManager ()
 @property (strong, nonatomic) NSMutableDictionary<NSString *, id<TPModuleProtocol>> *modulesDict;
+
+@property (copy, nonatomic) NSArray<id<TPModuleProtocol>> *allModules;
+@property (copy, nonatomic) NSData *moduleSortHint;
 @end
 
 @implementation TPModuleManager
@@ -32,8 +36,37 @@
     self.modulesDict[className] = [[clz alloc] init];
 }
 
+NSInteger moduleSortFunction(id<TPModuleProtocol> obj1, id<TPModuleProtocol> obj2, void *reverse) {
+    NSInteger priority1 = 0;
+    NSInteger priority2 = 0;
+    if ([[obj1 class] respondsToSelector:@selector(modulePriority)]) {
+        priority1 = [[obj1 class] modulePriority];
+    }
+    if ([[obj2 class] respondsToSelector:@selector(modulePriority)]) {
+        priority2 = [[obj2 class] modulePriority];
+    }
+    if (priority2 > priority1) {
+        if (*(BOOL *)reverse == NO) {
+            return NSOrderedDescending;
+        } else {
+            return NSOrderedAscending;
+        }
+    } else {
+        if (*(BOOL *)reverse == NO) {
+            return NSOrderedAscending;
+        } else {
+            return NSOrderedDescending;
+        }
+    }
+}
+
 - (NSArray<id<TPModuleProtocol>> *)allModules {
-    return self.modulesDict.allValues;
+    if (!_allModules || _allModules.count != self.modulesDict.count) {
+        BOOL reverse = NO;
+        _allModules = [self.modulesDict.allValues sortedArrayUsingFunction:moduleSortFunction context:&reverse hint:_moduleSortHint];
+        _moduleSortHint = [_allModules sortedArrayHint];
+    }
+    return _allModules;
 }
 
 #pragma mark - UIApplicationDelegate
@@ -52,14 +85,22 @@
     }];
     
     [[[TPModuleManager sharedInstance] allModules] enumerateObjectsUsingBlock:^(id<TPModuleProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        BOOL isAsync = NO;
+        if ([[obj class] respondsToSelector:@selector(isAsync)]) {
+            isAsync = [[obj class] isAsync];
+        }
         if ([obj respondsToSelector:@selector(moduleDidLoad:)]) {
-            [obj moduleDidLoad:[TinyPart sharedInstance].context];
+            if (isAsync) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [obj moduleDidLoad:[TinyPart sharedInstance].context];
+                });
+            } else {
+                [obj moduleDidLoad:[TinyPart sharedInstance].context];
+            }
         }
     }];
-    
     return result;
 }
-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     [[[TPModuleManager sharedInstance] allModules] enumerateObjectsUsingBlock:^(id<TPModuleProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -69,7 +110,6 @@
     }];
 }
 
-
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     [[[TPModuleManager sharedInstance] allModules] enumerateObjectsUsingBlock:^(id<TPModuleProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj respondsToSelector:@selector(applicationDidEnterBackground:)]) {
@@ -77,7 +117,6 @@
         }
     }];
 }
-
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     [[[TPModuleManager sharedInstance] allModules] enumerateObjectsUsingBlock:^(id<TPModuleProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -87,7 +126,6 @@
     }];
 }
 
-
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [[[TPModuleManager sharedInstance] allModules] enumerateObjectsUsingBlock:^(id<TPModuleProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj respondsToSelector:@selector(applicationDidBecomeActive:)]) {
@@ -95,7 +133,6 @@
         }
     }];
 }
-
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     [[[TPModuleManager sharedInstance] allModules] enumerateObjectsUsingBlock:^(id<TPModuleProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {

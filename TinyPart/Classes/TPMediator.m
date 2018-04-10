@@ -26,7 +26,7 @@
 }
 
 - (void)addRouter:(Class)routerClass {
-    NSAssert([routerClass isSubclassOfClass:[TPRouter class]], @"routerClass must be the sub-class of TPRouter");
+    NSAssert([routerClass isSubclassOfClass:[TPRouter class]], @"routerClass:%@ must be the sub-class of TPRouter", NSStringFromClass(routerClass));
     if (![routerClass isSubclassOfClass:[TPRouter class]]) {
         return;
     }
@@ -37,7 +37,7 @@
 - (void)addURLHost:(NSString *)host forRouter:(Class)routerClass {
     NSParameterAssert(host);
     NSParameterAssert(routerClass);
-    NSAssert([routerClass isSubclassOfClass:[TPRouter class]], @"routerClass must be the sub-class of TPRouter");
+    NSAssert([routerClass isSubclassOfClass:[TPRouter class]], @"routerClass:%@ must be the sub-class of TPRouter", NSStringFromClass(routerClass));
     if (!host || !routerClass) {
         return;
     }
@@ -52,7 +52,7 @@
     NSParameterAssert(path);
     NSParameterAssert(action);
     NSParameterAssert(routerClass);
-    NSAssert([routerClass isSubclassOfClass:[TPRouter class]], @"routerClass must be the sub-class of TPRouter");
+    NSAssert([routerClass isSubclassOfClass:[TPRouter class]], @"routerClass:%@ must be the sub-class of TPRouter", NSStringFromClass(routerClass));
     if (!path || !action || !routerClass) {
         return;
     }
