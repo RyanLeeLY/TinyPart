@@ -11,7 +11,7 @@
 #import "TestModuleService.h"
 #import "TestRouter.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <TPMediatorDelegate>
 
 @end
 
@@ -23,6 +23,7 @@
     [TPContext sharedContext].application = application;
     [TinyPart sharedInstance].context = [TPContext sharedContext];
     [[TPModuleManager sharedInstance] registerModule:[TestModule class]];
+    [TPMediator sharedInstance].deleagate = self;
     [[TPServiceManager sharedInstance] registerService:@protocol(TestModuleService1) impClass:[TestModuleService1Imp class]];
     [[TPServiceManager sharedInstance] registerService:@protocol(TestModuleService2) impClass:[TestModuleService2Imp class]];
     [[TPMediator sharedInstance] addRouter:[TestRouter class]];
@@ -30,5 +31,30 @@
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
+static BOOL login = NO;
+- (BOOL)mediator:(TPMediator *)mediator checkAuthRetryPerformActionHandler:(void (^)(void))retryHandler {
+    BOOL isLogin = login;
+    [self checkLogin:^{
+        if (!isLogin) {
+            retryHandler();
+        }
+    }];
+    return login;
+}
 
+- (BOOL)checkLogin:(void(^)(void))compeltionHandler {
+    if (login) {
+        compeltionHandler();
+    } else {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            NSLog(@"%@", @"登录成功");
+            static dispatch_once_t onceToken;
+            dispatch_once(&onceToken, ^{
+                login = YES;
+            });
+            compeltionHandler();
+        });
+    }
+    return login;
+}
 @end

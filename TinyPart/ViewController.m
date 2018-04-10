@@ -18,10 +18,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    id<TestModuleService1> service1 = [[TPServiceManager sharedInstance] serviceWithProtocolName:@"TestModuleService1"];
+    id<TestModuleService1> service1 = [[TPServiceManager sharedInstance] serviceWithName:@"TestModuleService1"];
     [service1 function1];
     
-    id<TestModuleService2> service2 = [[TPServiceManager sharedInstance] serviceWithProtocolName:@"TestModuleService2"];
+    id<TestModuleService2> service2 = [[TPServiceManager sharedInstance] serviceWithName:@"TestModuleService2"];
     [service2 function2];
     
     [[TPMediator sharedInstance] performAction:@"action1" router:@"Test" params:@{}];

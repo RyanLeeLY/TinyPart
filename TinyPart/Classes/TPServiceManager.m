@@ -38,8 +38,8 @@
     [self.servicesDict setObject:impClass forKey:name];
 }
 
-- (id)serviceWithProtocolName:(NSString *)protoName {
-    Class clz = self.servicesDict[protoName];
+- (id)serviceWithName:(NSString *)name {
+    Class clz = self.servicesDict[name];
     if (!clz) {
         return nil;
     }

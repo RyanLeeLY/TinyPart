@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TPRouter.h"
+
+@class TPMediator;
 
 #define TPURLHostForRouter(host, routerClass) \
 [[TPMediator sharedInstance] addURLHost:host forRouter:[routerClass class]];
@@ -17,7 +18,14 @@
 
 static NSString * const TPAppURLScheme = @"tinypart";
 
+@protocol TPMediatorDelegate <NSObject>
+@optional
+- (BOOL)mediator:(TPMediator *)mediator checkAuthRetryPerformActionHandler:(void(^)(void))retryHandler;
+@end
+
 @interface TPMediator : NSObject
+@property (weak, nonatomic) id<TPMediatorDelegate> deleagate;
+
 + (instancetype)sharedInstance;
 
 - (void)addRouter:(Class)routerClass;

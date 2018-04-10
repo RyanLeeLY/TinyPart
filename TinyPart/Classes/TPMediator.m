@@ -8,6 +8,7 @@
 
 #import "TPMediator.h"
 #import "TPServiceManager.h"
+#import "TPRouter.h"
 
 @interface TPMediator ()
 @property (strong, nonatomic) NSMutableDictionary *nativeRouterHostDict;        // {host: routerName}
@@ -68,11 +69,19 @@
 
 - (id)performAction:(NSString *)action router:(NSString *)router params:(NSDictionary *)params {
     NSString *routerName = TPRouterNameFromString(router);
-    TPRouter *routerService = [[TPServiceManager sharedInstance] serviceWithProtocolName:routerName];
+    TPRouter *routerService = [[TPServiceManager sharedInstance] serviceWithName:routerName];
     BOOL needAuth = [routerService authorizationBeforeAction:action];
     if (needAuth) {
-        // TODO: 登录监测代理
         NSLog(@"%@", @"Authorization required");
+        __weak typeof (self) weakSelf = self;
+        if ([self.deleagate respondsToSelector:@selector(mediator:checkAuthRetryPerformActionHandler:)]) {
+            if (![self.deleagate mediator:self checkAuthRetryPerformActionHandler:^{
+                [weakSelf performAction:action router:router params:params];
+            }]) {
+                return nil;
+            }
+            
+        }
     }
     
     SEL selector = TPRouterActionSelectorFromString(action);

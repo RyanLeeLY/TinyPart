@@ -16,5 +16,5 @@
 - (void)registerService:(Protocol *)proto impClass:(Class)impClass;
 - (void)registerServiceWithName:(NSString *)name impClass:(Class)impClass;
 
-- (id)serviceWithProtocolName:(NSString *)protoName;
+- (id)serviceWithName:(NSString *)name;
 @end
