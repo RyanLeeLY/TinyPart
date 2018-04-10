@@ -102,7 +102,7 @@
     NSString *host = URL.host;
     NSString *path = URL.path.length>0?URL.path:@"/";
     
-    NSString *tabBarItemString = URL.fragment;
+//    NSString *tabBarItemString = URL.fragment;
     // TODO: tabbar处理
     
     NSString *router = self.nativeRouterHostDict[host];
