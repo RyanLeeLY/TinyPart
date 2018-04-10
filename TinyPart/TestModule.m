@@ -7,7 +7,6 @@
 //
 
 #import "TestModule.h"
-#import "TinyPart.h"
 
 @implementation TestModule1
 TP_MODULE_AUTO_REGISTER

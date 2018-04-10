@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TPModuleProtocol.h"
+#import "TinyPart.h"
 
 @interface TestModule1 : NSObject <TPModuleProtocol>
 
