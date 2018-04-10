@@ -8,7 +8,11 @@
 
 #import "TPMediator.h"
 #import "TPServiceManager.h"
-#import <objc/runtime.h>
+
+@interface TPMediator ()
+@property (strong, nonatomic) NSMutableDictionary *nativeRouterHostDict;        // {host: routerName}
+@property (strong, nonatomic) NSMutableDictionary *nativeRouterActionPathDict;  // {routerName:{path:actionName}}
+@end
 
 @implementation TPMediator
 + (instancetype)sharedInstance {
@@ -29,22 +33,116 @@
     [[TPServiceManager sharedInstance] registerServiceWithName:routerName impClass:routerClass];
 }
 
+- (void)addURLHost:(NSString *)host forRouter:(Class)routerClass {
+    NSParameterAssert(host);
+    NSParameterAssert(routerClass);
+    NSAssert([routerClass isSubclassOfClass:[TPRouter class]], @"routerClass must be the sub-class of TPRouter");
+    if (!host || !routerClass) {
+        return;
+    }
+    NSString *routerName = [routerClass routerName];
+    if (!routerName) {
+        return;
+    }
+    self.nativeRouterHostDict[host] = routerName;
+}
+
+- (void)addURLPath:(NSString *)path forAction:(NSString *)action forRouter:(Class)routerClass {
+    NSParameterAssert(path);
+    NSParameterAssert(action);
+    NSParameterAssert(routerClass);
+    NSAssert([routerClass isSubclassOfClass:[TPRouter class]], @"routerClass must be the sub-class of TPRouter");
+    if (!path || !action || !routerClass) {
+        return;
+    }
+    NSString *routerName = [routerClass routerName];
+    if (!routerName) {
+        return;
+    }
+    if (self.nativeRouterActionPathDict[routerName]) {
+        self.nativeRouterActionPathDict[routerName][path] = action;
+    } else {
+        self.nativeRouterActionPathDict[routerName] = [NSMutableDictionary dictionaryWithObject:action forKey:path];
+    }
+}
+
 - (id)performAction:(NSString *)action router:(NSString *)router params:(NSDictionary *)params {
     NSString *routerName = TPRouterNameFromString(router);
     TPRouter *routerService = [[TPServiceManager sharedInstance] serviceWithProtocolName:routerName];
     BOOL needAuth = [routerService authorizationBeforeAction:action];
     if (needAuth) {
-        
+        // TODO: 登录监测代理
+        NSLog(@"%@", @"Authorization required");
     }
     
     SEL selector = TPRouterActionSelectorFromString(action);
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     if ([routerService respondsToSelector:selector]) {
-        [routerService performSelector:selector withObject:params];
+        return [routerService performSelector:selector withObject:params];
     }
 #pragma clang diagnostic pop
 
     return nil;
+}
+
+- (BOOL)openURL:(NSURL *)URL {
+    if (![self canOpenURL:URL]) {
+        return NO;
+    }
+    NSString *host = URL.host;
+    NSString *path = URL.path.length>0?URL.path:@"/";
+    
+    NSString *tabBarItemString = URL.fragment;
+    // TODO: tabbar处理
+    
+    NSString *router = self.nativeRouterHostDict[host];
+    NSString *action = self.nativeRouterActionPathDict[router][path];
+    
+    [self performAction:action router:router params:TPDictionaryFromURLQueryString(URL.query)];
+    
+    return YES;
+}
+
+- (BOOL)canOpenURL:(NSURL *)URL {
+    if(![[URL.scheme lowercaseString] isEqualToString:TPAppURLScheme]) {
+        return NO;
+    }
+    
+    NSString *host = URL.host;
+    NSString *path = URL.path.length>0?URL.path:@"/";
+    
+    NSString *router = self.nativeRouterHostDict[host];
+    NSString *action = self.nativeRouterActionPathDict[router][path];
+    
+    if (!router || !action) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (NSMutableDictionary *)nativeRouterHostDict {
+    if (!_nativeRouterHostDict) {
+        _nativeRouterHostDict = [NSMutableDictionary dictionary];
+    }
+    return _nativeRouterHostDict;
+}
+
+- (NSMutableDictionary *)nativeRouterActionPathDict {
+    if (!_nativeRouterActionPathDict) {
+        _nativeRouterActionPathDict = [NSMutableDictionary dictionary];
+    }
+    return _nativeRouterActionPathDict;
+}
+
+static inline NSDictionary * TPDictionaryFromURLQueryString(NSString *query) {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    for (NSString *param in [query componentsSeparatedByString:@"&"]) {
+        NSArray *elts = [param componentsSeparatedByString:@"="];
+        if([elts count] < 2) continue;
+        [params setObject:[[elts lastObject] stringByRemovingPercentEncoding] forKey:[[elts firstObject] stringByRemovingPercentEncoding]];
+    }
+    return [params copy];
 }
 @end

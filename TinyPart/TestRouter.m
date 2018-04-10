@@ -9,6 +9,7 @@
 #import "TestRouter.h"
 
 @implementation TestRouter
+TPRouter_AUTH_REQUIRE(@"action1")
 
 TPROUTER_METHOD_EXPORT(action1, {
     NSLog(@"TestRouter action1 params=%@", params);

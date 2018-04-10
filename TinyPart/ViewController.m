@@ -25,6 +25,7 @@
     [service2 function2];
     
     [[TPMediator sharedInstance] performAction:@"action1" router:@"Test" params:@{}];
+    [[TPMediator sharedInstance] openURL:[NSURL URLWithString:@"tinypart://com.tinypart.test/action1?id=1&name=tinypart"]];
 }
 
 

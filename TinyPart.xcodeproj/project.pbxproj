@@ -23,6 +23,7 @@
 		255E31AB207B4F20002166CB /* TPMediator.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E31AA207B4F20002166CB /* TPMediator.m */; };
 		255E31AE207B52A0002166CB /* TPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E31AD207B52A0002166CB /* TPRouter.m */; };
 		255E31B1207B6585002166CB /* TestRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E31B0207B6585002166CB /* TestRouter.m */; };
+		255E31B4207C5FC8002166CB /* TPMediator+Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E31B3207C5FC8002166CB /* TPMediator+Test.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,8 @@
 		255E31AD207B52A0002166CB /* TPRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPRouter.m; sourceTree = "<group>"; };
 		255E31AF207B6585002166CB /* TestRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestRouter.h; sourceTree = "<group>"; };
 		255E31B0207B6585002166CB /* TestRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestRouter.m; sourceTree = "<group>"; };
+		255E31B2207C5FC8002166CB /* TPMediator+Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TPMediator+Test.h"; sourceTree = "<group>"; };
+		255E31B3207C5FC8002166CB /* TPMediator+Test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TPMediator+Test.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +102,8 @@
 				255E31B0207B6585002166CB /* TestRouter.m */,
 				255E31A6207B45D5002166CB /* TestModuleService.h */,
 				255E31A7207B45D5002166CB /* TestModuleService.m */,
+				255E31B2207C5FC8002166CB /* TPMediator+Test.h */,
+				255E31B3207C5FC8002166CB /* TPMediator+Test.m */,
 				255E317B2079E607002166CB /* ViewController.h */,
 				255E317C2079E607002166CB /* ViewController.m */,
 				255E317E2079E607002166CB /* Main.storyboard */,
@@ -203,6 +208,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				255E31B4207C5FC8002166CB /* TPMediator+Test.m in Sources */,
 				255E317D2079E607002166CB /* ViewController.m in Sources */,
 				255E319D2079FE80002166CB /* TPModuleManager.m in Sources */,
 				255E31AE207B52A0002166CB /* TPRouter.m in Sources */,
