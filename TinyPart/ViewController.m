@@ -28,8 +28,9 @@
     id<TestModuleService3> service3 = [[TPServiceManager sharedInstance] serviceWithName:@"TestModuleService3"];
     [service3 function3];
     
-//    [[TPMediator sharedInstance] performAction:@"action1" router:@"Test" params:@{}];
-    [[TPMediator sharedInstance] openURL:[NSURL URLWithString:@"tinypart://com.tinypart.test/action1?id=1&name=tinypart"]];
+    [[TPMediator sharedInstance] performAction:@"action2" router:@"Test" params:@{}];
+    NSURL *url = [NSURL URLWithString:@"tinypart://com.tinypart.test/action1?id=1&name=tinypart"];
+    [[TPMediator sharedInstance] openURL:url];
     
     TPNotificationCenter *center3 = [TestModule3 tp_notificationCenter];
     [center3 addObserver:self selector:@selector(testNotification:) name:@"broadcast_notification_from_TestModule2" object:nil];

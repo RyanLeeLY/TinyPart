@@ -44,7 +44,7 @@ TP_MODULE_ASYNC
 
 TP_MODULE_PRIORITY(2)
 
-TP_MODULE_LEVEL(TPModuleLevelMiddle)
+TP_MODULE_LEVEL(TPModuleLevelBasic)
 
 - (void)moduleDidLoad:(TPContext *)context {
     switch (context.env) {

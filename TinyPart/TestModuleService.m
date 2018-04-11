@@ -10,7 +10,7 @@
 #import "TinyPart.h"
 
 @implementation TestModuleService1Imp
-TPSERVICE_AUTO_REGISTER(TestModuleService1)
+TPSERVICE_AUTO_REGISTER(TestModuleService1) // 自动注册服务
 
 - (void)function1 {
     NSLog(@"%@", @"TestModuleService1 function1");
