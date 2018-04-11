@@ -19,10 +19,35 @@ pod 'TinyPart'
 * **多级模块有向通信**。一般来说，完全去耦合的模块间通信方案大概是两种：URL和通知```NSNotification```。URL解决了模块间服务相互调用的问题，但是如果想要通过URL实现一个观察者模式则会变得非常复杂。这时候大家可能会偏向于选择通知，但是由于通知是全局性的，这样会导致任何一条通知可能会被APP内任何一个模块所使用，久而久之这些通知会变得难以维护。<br>所谓**多级模块有向通信**，则是在```NSNotification```基础上对通知的传播方向进行了限制，底层模块对上层模块的通知称为**广播**```Broadcast```，上层模块对底层模块或者同层模块的通知称为**上报**```Report```。这样做有两个好处：一方面更利于通知的维护，另一方面可以帮助我们划分模块层级，如果我们发现有一个模块需要向多个同级模块进行```Report```那么这个模块很有可能应该被划分到更底层的模块。
 
 ## 架构说明
+![架构图](https://github.com/RyanLeeLY/TinyPart/blob/master/TinyPart.jpeg)
 
 ## 用法
-### 1.模块Module用法
-* **定义和注册一个模块**
+### 初始化
+* 继承 TPAppDelegate，初始化TPContext
+
+```Objective-C
+#import "TinyPart.h"
+
+@interface AppDelegate : TPAppDelegate
+@property (strong, nonatomic) UIWindow *window;
+@end
+
+@implementation AppDelegate
+@synthesize window;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [TPMediator sharedInstance].deleagate = self;
+
+    [TPContext sharedContext].launchOptions = launchOptions;
+    [TPContext sharedContext].application = application;
+    [TinyPart sharedInstance].context = [TPContext sharedContext];
+    
+    return [super application:application didFinishLaunchingWithOptions:launchOptions];
+}
+```
+
+### 模块Module
+* **定义并注册一个模块**
 
 ```Objective-C
 #import "TinyPart.h"
@@ -58,8 +83,8 @@ TP_MODULE_LEVEL(TPModuleLevelBasic)     // 模块级别：基础模块
 @end
 ```
 
-### 2.服务Service用法
-* **定义和注册一个服务Service**。Service可自定义单例模式或多例模式。
+### 服务Service用法
+* **定义并注册一个服务Service**。Service可自定义单例模式或多例模式。
 
 ```Objective-C
 #import "TPServiceProtocol.h"
@@ -79,15 +104,15 @@ TPSERVICE_AUTO_REGISTER(TestModuleService1) // 自动注册服务
 }
 @end
 ```
-* **访问一个服务Sevice**
+* **访问服务Sevice**
 
 ```Objective-C
 id<TestModuleService1> service1 = [[TPServiceManager sharedInstance] serviceWithName:@"TestModuleService1"];
     [service1 function1];
 ```
 
-### 3.路由Router用法
-* **定义和注册一个路由Router**
+### 路由Router用法
+* **定义并注册一个路由Router**
 
 ```Objective-C
 #import "TPRouter.h"
@@ -113,13 +138,35 @@ TPROUTER_METHOD_EXPORT(action2, {
 });
 @end
 ```
-* **使用一个路由Router**
+* **使用路由Router**
 
 ```Objective-C
 [[TPMediator sharedInstance] performAction:@"action1" router:@"Test" params:@{}];
 ```
 
-### 4.URL路由
+### URL路由
+* **配置configPlistFile**。```TinyPart.bundle/TinyPart.plist```是```context.configPlistFileName ```的默认路径，因此即使没有下面第二行代码也是OK的。
+
+```
+TPContext *context = [TPContext sharedContext];
+context.configPlistFileName = @"TinyPart.bundle/TinyPart.plist";
+[TinyPart sharedInstance].context = context;
+```
+* **新建**```TinyPart.bundle/TinyPart.plist```，并注册一条**URL Scheme**
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>APPURLSchemes</key>
+	<array>
+		<string>tinypart</string>
+	</array>
+</dict>
+</plist>
+```
+
 * **定义一条URL路由规则**。在已有的```TestRouter```基础上，我们只需要新建一个```TPMediator+Test```的扩展。
 
 ```Objective-C
@@ -140,7 +187,7 @@ NSURL *url = [NSURL URLWithString:@"tinypart://com.tinypart.test/action1?id=1&na
 [[TPMediator sharedInstance] openURL:url];
 ```
 
-### 5.有向通信
+### 有向通信
 * **发送**。这里注意前面提到的，底层模块对上层模块的通知称为**广播**```Broadcast```，上层模块对底层模块或者同层模块的通知称为**上报**```Report```。模块级别分为**Basic、Middle、Topout**三个级别。
 
 ```Objective-C

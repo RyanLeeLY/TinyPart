@@ -23,7 +23,16 @@
 
     [TPContext sharedContext].launchOptions = launchOptions;
     [TPContext sharedContext].application = application;
-    [TinyPart sharedInstance].context = [TPContext sharedContext];
+    
+    TPContext *context = [TPContext sharedContext];
+    
+    // DefaultFileName:@"TinyPart.bundle/TinyPart.plist";
+    context.configPlistFileName = @"xxx.bundle/xxx.plist";
+    context.modulePlistFileName = @"xxx.bundle/xxx.plist";
+    context.servicePlistFileName = @"xxx.bundle/xxx.plist";
+    context.routerPlistFileName = @"xxx.bundle/xxx.plist";
+    
+    [TinyPart sharedInstance].context = context;
     
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }

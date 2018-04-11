@@ -46,27 +46,35 @@ static NSString * const TP_PLIST_ROUTER_KEY = @"RouterClasses";
     NSString *servicePlistFilePath = [bundle pathForResource:context.servicePlistFileName ofType:nil];
     NSString *routerPlistFilePath = [bundle pathForResource:context.routerPlistFileName ofType:nil];
     
-    NSDictionary *configDict = [NSDictionary dictionaryWithContentsOfFile:configPlistFilePath];
-    NSArray *schemes = configDict[TP_PLIST_APPURLSCHEME_KEY];
-    [[TPMediator sharedInstance] setAPPURLSchemes:schemes];
+    if (configPlistFilePath) {
+        NSDictionary *configDict = [NSDictionary dictionaryWithContentsOfFile:configPlistFilePath];
+        NSArray *schemes = configDict[TP_PLIST_APPURLSCHEME_KEY];
+        [[TPMediator sharedInstance] setAPPURLSchemes:schemes];
+    }
     
-    NSDictionary *moduleDict = [NSDictionary dictionaryWithContentsOfFile:modulePlistFilePath];
-    NSArray *moduleArray = moduleDict[TP_PLIST_MODULE_KEY];
-    [moduleArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self registerModule:NSClassFromString(obj)];
-    }];
+    if (modulePlistFilePath) {
+        NSDictionary *moduleDict = [NSDictionary dictionaryWithContentsOfFile:modulePlistFilePath];
+        NSArray *moduleArray = moduleDict[TP_PLIST_MODULE_KEY];
+        [moduleArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self registerModule:NSClassFromString(obj)];
+        }];
+    }
     
-    NSDictionary *serviceDict = [NSDictionary dictionaryWithContentsOfFile:servicePlistFilePath];
-    NSDictionary *serviceTable = serviceDict[TP_PLIST_SERVICE_KEY];
-    [serviceTable enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        [self registerService:NSProtocolFromString(key) impClass:NSClassFromString(obj)];
-    }];
+    if (servicePlistFilePath) {
+        NSDictionary *serviceDict = [NSDictionary dictionaryWithContentsOfFile:servicePlistFilePath];
+        NSDictionary *serviceTable = serviceDict[TP_PLIST_SERVICE_KEY];
+        [serviceTable enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            [self registerService:NSProtocolFromString(key) impClass:NSClassFromString(obj)];
+        }];
+    }
     
-    NSDictionary *routerDict = [NSDictionary dictionaryWithContentsOfFile:routerPlistFilePath];
-    NSArray *routerArray = routerDict[TP_PLIST_ROUTER_KEY];
-    [routerArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self addRouter:NSClassFromString(obj)];
-    }];
+    if (routerPlistFilePath) {
+        NSDictionary *routerDict = [NSDictionary dictionaryWithContentsOfFile:routerPlistFilePath];
+        NSArray *routerArray = routerDict[TP_PLIST_ROUTER_KEY];
+        [routerArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self addRouter:NSClassFromString(obj)];
+        }];
+    }
     
     _context = context;
 }
