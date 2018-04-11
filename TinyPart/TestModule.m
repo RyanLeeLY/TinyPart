@@ -14,6 +14,8 @@ TP_MODULE_AUTO_REGISTER
 TP_MODULE_ASYNC
 TP_MODULE_PRIORITY(1)
 
+TP_MODULE_LEVEL(TPModuleLevelBasic)
+
 - (void)moduleDidLoad:(TPContext *)context {
     switch (context.env) {
         case TPRunningEnviromentTypeDebug: {
@@ -36,6 +38,8 @@ TP_MODULE_AUTO_REGISTER
 TP_MODULE_ASYNC
 TP_MODULE_PRIORITY(2)
 
+TP_MODULE_LEVEL(TPModuleLevelMiddle)
+
 - (void)moduleDidLoad:(TPContext *)context {
     switch (context.env) {
         case TPRunningEnviromentTypeDebug: {
@@ -54,6 +58,8 @@ TP_MODULE_PRIORITY(2)
 
 @implementation TestModule3
 TP_MODULE_PRIORITY(100)
+
+TP_MODULE_LEVEL(TPModuleLevelTopout)
 
 - (void)moduleDidLoad:(TPContext *)context {
     switch (context.env) {

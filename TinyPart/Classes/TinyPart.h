@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <UserNotifications/UserNotifications.h>
-
 #import "TPContext.h"
 #import "TPModuleManager.h"
 #import "TPServiceManager.h"
@@ -16,6 +14,11 @@
 #import "TPAppDelegate.h"
 #import "TPModuleProtocol.h"
 #import "TPServiceProtocol.h"
+#import "TPNotificationCenter.h"
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 100000
+#import <UserNotifications/UserNotifications.h>
+#endif
 
 #define TP_MODULE_AUTO_REGISTER \
 + (void)load { \
@@ -40,5 +43,4 @@
 
 - (void)addRouter:(Class)routerClass;
 @end
-
 

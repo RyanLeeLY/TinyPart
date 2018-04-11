@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <UserNotifications/UserNotifications.h>
 #import "TPModuleProtocol.h"
 
 @class TPContext;
-
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 100000
+#import <UserNotifications/UserNotifications.h>
 @interface TPModuleManager : NSObject <UIApplicationDelegate, UNUserNotificationCenterDelegate>
+#else
+@interface TPModuleManager : NSObject <UIApplicationDelegate>
+#endif
 
 @property (copy, nonatomic, readonly) NSArray<id<TPModuleProtocol>> *allModules;
 

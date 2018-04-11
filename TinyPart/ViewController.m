@@ -9,15 +9,16 @@
 #import "ViewController.h"
 #import "TinyPart.h"
 #import "TestModuleService.h"
+#import "TestModule.h"
 
 @interface ViewController ()
-
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     id<TestModuleService1> service1 = [[TPServiceManager sharedInstance] serviceWithName:@"TestModuleService1"];
     [service1 function1];
     
@@ -29,6 +30,22 @@
     
 //    [[TPMediator sharedInstance] performAction:@"action1" router:@"Test" params:@{}];
     [[TPMediator sharedInstance] openURL:[NSURL URLWithString:@"tinypart://com.tinypart.test/action1?id=1&name=tinypart"]];
+    
+    TPNotificationCenter *center3 = [TestModule3 tp_notificationCenter];
+    [center3 addObserver:self selector:@selector(testNotification:) name:@"broadcast_notification_from_TestModule2" object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    TPNotificationCenter *center2 = [TestModule2 tp_notificationCenter];
+    [center2 reportNotification:^(TPNotificationMaker *make) {
+        make.name(@"report_notification_from_TestModule2");
+    } targetModule:@"TestModule1"];
+    
+    [center2 broadcastNotification:^(TPNotificationMaker *make) {
+        make.name(@"broadcast_notification_from_TestModule2");
+    }];
 }
 
 
@@ -37,5 +54,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)testNotification:(id)aNotification {
+    NSLog(@"ViewController testNotification %@", aNotification);
+}
 
 @end

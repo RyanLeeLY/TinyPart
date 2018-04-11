@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <UserNotifications/UserNotifications.h>
+
+@class TPContext;
+@class TPNotificationCenter;
 
 #define TP_MODULE_ASYNC \
 + (BOOL)isAsync { \
@@ -17,12 +19,30 @@
 + (NSInteger)modulePriority { \
     return priority;}
 
-@class TPContext;
+#define TP_MODULE_LEVEL(ModuleLevel) \
++ (TPModuleLevel)moduleLevel {\
+    return ModuleLevel;}
 
+
+typedef NS_ENUM(NSUInteger, TPModuleLevel) {
+    TPModuleLevelBasic = 0,
+    TPModuleLevelMiddle,
+    TPModuleLevelTopout,
+};
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 100000
+#import <UserNotifications/UserNotifications.h>
 @protocol TPModuleProtocol <NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate>
+#else
+@protocol TPModuleProtocol <NSObject, UIApplicationDelegate>
+#endif
+
 @optional
 + (BOOL)isAsync;
 + (NSInteger)modulePriority;
++ (TPModuleLevel)moduleLevel;
 
 - (void)moduleDidLoad:(TPContext *)context;
+
++ (TPNotificationCenter *)tp_notificationCenter;
 @end

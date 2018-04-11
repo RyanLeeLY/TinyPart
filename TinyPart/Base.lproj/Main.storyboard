@@ -20,11 +20,57 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nsN-Wg-4yT">
+                                <rect key="frame" x="132" y="120" width="110" height="30"/>
+                                <state key="normal" title="ViewController2"/>
+                                <connections>
+                                    <segue destination="Use-XS-N4o" kind="show" id="C1T-BV-3NT"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="nsN-Wg-4yT" firstAttribute="top" secondItem="AT3-eq-QXZ" secondAttribute="bottom" constant="100" id="QS3-mI-RaA"/>
+                            <constraint firstItem="nsN-Wg-4yT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vPG-hG-MJu"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="180" y="52"/>
+        </scene>
+        <!--View Controller2-->
+        <scene sceneID="U6B-8h-8QO">
+            <objects>
+                <viewController id="Use-XS-N4o" customClass="ViewController2" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZUN-iI-0sN"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vm0-Uh-BPl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ugM-Ja-Ccb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TbF-9h-HCw">
+                                <rect key="frame" x="170" y="142" width="34" height="30"/>
+                                <state key="normal" title="back"/>
+                                <connections>
+                                    <action selector="backButtonTapped:" destination="Use-XS-N4o" eventType="touchUpInside" id="RQi-ia-k7s"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="TbF-9h-HCw" firstAttribute="top" secondItem="ZUN-iI-0sN" secondAttribute="bottom" constant="122" id="V0w-IV-Tof"/>
+                            <constraint firstItem="TbF-9h-HCw" firstAttribute="centerX" secondItem="ugM-Ja-Ccb" secondAttribute="centerX" id="acX-Er-Rxi"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="CN5-ED-gUl"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UDW-Ad-ekr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1044" y="134"/>
         </scene>
     </scenes>
 </document>

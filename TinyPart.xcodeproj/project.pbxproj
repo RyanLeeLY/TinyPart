@@ -25,6 +25,9 @@
 		255E31B1207B6585002166CB /* TestRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E31B0207B6585002166CB /* TestRouter.m */; };
 		255E31B4207C5FC8002166CB /* TPMediator+Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E31B3207C5FC8002166CB /* TPMediator+Test.m */; };
 		255E31B6207CA4BD002166CB /* TinyPart.plist in Resources */ = {isa = PBXBuildFile; fileRef = 255E31B5207CA4BD002166CB /* TinyPart.plist */; };
+		25D15722207DA92A00D60E92 /* TinyPart.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 25D15721207DA92900D60E92 /* TinyPart.bundle */; };
+		25D15725207DAB6A00D60E92 /* TPNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D15724207DAB6A00D60E92 /* TPNotificationCenter.m */; };
+		25D15728207DF46A00D60E92 /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D15727207DF46A00D60E92 /* ViewController2.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +66,11 @@
 		255E31B2207C5FC8002166CB /* TPMediator+Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TPMediator+Test.h"; sourceTree = "<group>"; };
 		255E31B3207C5FC8002166CB /* TPMediator+Test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "TPMediator+Test.m"; sourceTree = "<group>"; };
 		255E31B5207CA4BD002166CB /* TinyPart.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = TinyPart.plist; sourceTree = "<group>"; };
+		25D15721207DA92900D60E92 /* TinyPart.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TinyPart.bundle; sourceTree = "<group>"; };
+		25D15723207DAB6A00D60E92 /* TPNotificationCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPNotificationCenter.h; sourceTree = "<group>"; };
+		25D15724207DAB6A00D60E92 /* TPNotificationCenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPNotificationCenter.m; sourceTree = "<group>"; };
+		25D15726207DF46A00D60E92 /* ViewController2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController2.h; sourceTree = "<group>"; };
+		25D15727207DF46A00D60E92 /* ViewController2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController2.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				255E318E2079E613002166CB /* Classes */,
+				25D15720207DA76300D60E92 /* Resources */,
 				255E31782079E607002166CB /* AppDelegate.h */,
 				255E31792079E607002166CB /* AppDelegate.m */,
 				255E31A1207B1467002166CB /* TestModule.h */,
@@ -108,6 +117,8 @@
 				255E31B3207C5FC8002166CB /* TPMediator+Test.m */,
 				255E317B2079E607002166CB /* ViewController.h */,
 				255E317C2079E607002166CB /* ViewController.m */,
+				25D15726207DF46A00D60E92 /* ViewController2.h */,
+				25D15727207DF46A00D60E92 /* ViewController2.m */,
 				255E317E2079E607002166CB /* Main.storyboard */,
 				255E31812079E608002166CB /* Assets.xcassets */,
 				255E31832079E608002166CB /* LaunchScreen.storyboard */,
@@ -137,8 +148,18 @@
 				255E319F207A1595002166CB /* TPAppDelegate.m */,
 				255E31A4207B3FD9002166CB /* TPModuleProtocol.h */,
 				255E31A5207B3FE7002166CB /* TPServiceProtocol.h */,
+				25D15723207DAB6A00D60E92 /* TPNotificationCenter.h */,
+				25D15724207DAB6A00D60E92 /* TPNotificationCenter.m */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		25D15720207DA76300D60E92 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				25D15721207DA92900D60E92 /* TinyPart.bundle */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +221,7 @@
 			files = (
 				255E31852079E608002166CB /* LaunchScreen.storyboard in Resources */,
 				255E31822079E608002166CB /* Assets.xcassets in Resources */,
+				25D15722207DA92A00D60E92 /* TinyPart.bundle in Resources */,
 				255E31B6207CA4BD002166CB /* TinyPart.plist in Resources */,
 				255E31802079E607002166CB /* Main.storyboard in Resources */,
 			);
@@ -223,7 +245,9 @@
 				255E31882079E608002166CB /* main.m in Sources */,
 				255E31AB207B4F20002166CB /* TPMediator.m in Sources */,
 				255E31942079E63B002166CB /* TinyPart.m in Sources */,
+				25D15725207DAB6A00D60E92 /* TPNotificationCenter.m in Sources */,
 				255E317A2079E607002166CB /* AppDelegate.m in Sources */,
+				25D15728207DF46A00D60E92 /* ViewController2.m in Sources */,
 				255E31A3207B1467002166CB /* TestModule.m in Sources */,
 				255E31912079E62F002166CB /* TPContext.m in Sources */,
 			);
