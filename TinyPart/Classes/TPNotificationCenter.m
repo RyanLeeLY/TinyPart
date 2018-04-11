@@ -77,8 +77,8 @@
         targetModuleLevel = [targetModule moduleLevel];
     }
     
-    NSAssert(targetModuleLevel < moduleLevel, @"High-level module report to basic-level module");
-    if (targetModuleLevel >= moduleLevel) {
+    NSAssert(targetModuleLevel <= moduleLevel, @"High-level module report to basic-level module");
+    if (targetModuleLevel > moduleLevel) {
         return;
     }
     
