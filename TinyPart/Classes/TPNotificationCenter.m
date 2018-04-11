@@ -52,7 +52,7 @@
 - (void)broadcastNotification:(void (^)(TPNotificationMaker *))makerHandler {
     TPNotificationMaker *maker = [[TPNotificationMaker alloc] init];
     makerHandler(maker);
-    NSParameterAssert(maker.m_name);
+    NSAssert(maker.m_name, @"Report notification's name cannot be nil!");
     if (!maker.m_name) {
         return;
     }
@@ -65,7 +65,7 @@
 - (void)reportNotification:(void (^)(TPNotificationMaker *))makerHandler targetModule:(NSString *)moduleName {
     TPNotificationMaker *maker = [[TPNotificationMaker alloc] init];
     makerHandler(maker);
-    NSParameterAssert(maker.m_name);
+    NSAssert(maker.m_name, @"Report notification's name cannot be nil!");
     if (!maker.m_name) {
         return;
     }
