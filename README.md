@@ -44,6 +44,7 @@ pod 'TinyPart'
     
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
+@end
 ```
 
 ### 模块Module
