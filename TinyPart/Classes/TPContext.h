@@ -15,6 +15,7 @@ typedef NS_ENUM(NSUInteger, TPRunningEnviromentType) {
 
 @interface TPContext : NSObject
 + (instancetype)sharedContext;
+@property(copy, nonatomic) NSString *configPlistFileName;
 
 @property(assign, nonatomic) TPRunningEnviromentType env;
 

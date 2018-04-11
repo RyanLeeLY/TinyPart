@@ -23,8 +23,6 @@ ClangDiagnosticUndeclaredSelector \
 [[TPMediator sharedInstance] addURLPath:path forAction:NSStringFromSelector(@selector(action)) forRouter:[routerClass class]]; \
 ClangPop
 
-static NSString * const TPAppURLScheme = @"tinypart";
-
 @protocol TPMediatorDelegate <NSObject>
 @optional
 - (BOOL)mediator:(TPMediator *)mediator checkAuthRetryPerformActionHandler:(void(^)(void))retryHandler;
@@ -34,6 +32,8 @@ static NSString * const TPAppURLScheme = @"tinypart";
 @property (weak, nonatomic) id<TPMediatorDelegate> deleagate;
 
 + (instancetype)sharedInstance;
+
+- (void)setAPPURLSchemes:(NSArray<NSString *> *)schemes;
 
 - (void)addRouter:(Class)routerClass;
 - (void)addURLHost:(NSString *)host forRouter:(Class)routerClass;

@@ -8,6 +8,11 @@
 
 #import "TinyPart.h"
 
+static NSString * const TP_PLIST_APPURLSCHEME_KEY = @"APPURLSchemes";
+static NSString * const TP_PLIST_MODULE_KEY = @"ModuleClasses";
+static NSString * const TP_PLIST_SERVICE_KEY = @"ServicesTable";
+static NSString * const TP_PLIST_ROUTER_KEY = @"RouterClasses";
+
 @interface TinyPart ()
 @end
 
@@ -36,24 +41,29 @@
 - (void)setContext:(TPContext *)context {
     NSBundle *bundle = context.plistBundle?:[NSBundle mainBundle];
     
+    NSString *configPlistFilePath = [bundle pathForResource:context.configPlistFileName ofType:nil];
     NSString *modulePlistFilePath = [bundle pathForResource:context.modulePlistFileName ofType:nil];
     NSString *servicePlistFilePath = [bundle pathForResource:context.servicePlistFileName ofType:nil];
     NSString *routerPlistFilePath = [bundle pathForResource:context.routerPlistFileName ofType:nil];
     
+    NSDictionary *configDict = [NSDictionary dictionaryWithContentsOfFile:configPlistFilePath];
+    NSArray *schemes = configDict[TP_PLIST_APPURLSCHEME_KEY];
+    [[TPMediator sharedInstance] setAPPURLSchemes:schemes];
+    
     NSDictionary *moduleDict = [NSDictionary dictionaryWithContentsOfFile:modulePlistFilePath];
-    NSArray *moduleArray = moduleDict[@"ModuleClasses"];
+    NSArray *moduleArray = moduleDict[TP_PLIST_MODULE_KEY];
     [moduleArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [self registerModule:NSClassFromString(obj)];
     }];
     
     NSDictionary *serviceDict = [NSDictionary dictionaryWithContentsOfFile:servicePlistFilePath];
-    NSDictionary *serviceTable = serviceDict[@"ServicesTable"];
+    NSDictionary *serviceTable = serviceDict[TP_PLIST_SERVICE_KEY];
     [serviceTable enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         [self registerService:NSProtocolFromString(key) impClass:NSClassFromString(obj)];
     }];
     
     NSDictionary *routerDict = [NSDictionary dictionaryWithContentsOfFile:routerPlistFilePath];
-    NSArray *routerArray = routerDict[@"RouterClasses"];
+    NSArray *routerArray = routerDict[TP_PLIST_ROUTER_KEY];
     [routerArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [self addRouter:NSClassFromString(obj)];
     }];

@@ -9,10 +9,12 @@
 #import "TPMediator.h"
 #import "TPServiceManager.h"
 #import "TPRouter.h"
+#import "TinyPart.h"
 
 @interface TPMediator ()
 @property (strong, nonatomic) NSMutableDictionary *nativeRouterHostDict;        // {host: routerName}
 @property (strong, nonatomic) NSMutableDictionary *nativeRouterActionPathDict;  // {routerName:{path:actionName}}
+@property (strong, nonatomic) NSArray *appURLSchemes;
 @end
 
 @implementation TPMediator
@@ -23,6 +25,13 @@
         TPMediatorInstance = [[TPMediator alloc] init];
     });
     return TPMediatorInstance;
+}
+
+- (void)setAPPURLSchemes:(NSArray<NSString *> *)schemes {
+    if (_appURLSchemes == schemes) {
+        return;
+    }
+    _appURLSchemes = schemes;
 }
 
 - (void)addRouter:(Class)routerClass {
@@ -114,7 +123,7 @@
 }
 
 - (BOOL)canOpenURL:(NSURL *)URL {
-    if(![[URL.scheme lowercaseString] isEqualToString:TPAppURLScheme]) {
+    if (![self.appURLSchemes containsObject:URL.scheme]) {
         return NO;
     }
     

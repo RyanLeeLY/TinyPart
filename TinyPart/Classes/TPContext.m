@@ -25,6 +25,7 @@
         _modulePlistFileName = @"TinyPart.bundle/TinyPart.plist";
         _servicePlistFileName = @"TinyPart.bundle/TinyPart.plist";
         _routerPlistFileName = @"TinyPart.bundle/TinyPart.plist";
+        _configPlistFileName = @"TinyPart.bundle/TinyPart.plist";
     }
     return self;
 }
