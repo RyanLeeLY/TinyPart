@@ -165,7 +165,8 @@ NSInteger moduleSortFunction(id<TPModuleProtocol> obj1, id<TPModuleProtocol> obj
         if ([obj respondsToSelector:@selector(applicationDidReceiveMemoryWarning:)]) {
             [obj applicationDidReceiveMemoryWarning:application];
         }
-    }];}
+    }];
+}
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     [[[TPModuleManager sharedInstance] allModules] enumerateObjectsUsingBlock:^(id<TPModuleProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
