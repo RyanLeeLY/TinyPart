@@ -44,7 +44,7 @@
     } targetModule:@"TestModule1"];
     
     [center2 broadcastNotification:^(TPNotificationMaker *make) {
-        make.name(@"broadcast_notification_from_TestModule2");
+        make.name(@"broadcast_notification_from_TestModule2").userInfo(@{@"key":@"value"}).object(self);
     }];
 }
 
