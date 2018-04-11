@@ -1,5 +1,5 @@
 # TinyPart
-TinyPart是一个由Objective-C编写的面向服务的iOS模块化实践框架。
+TinyPart是一个由Objective-C编写的面向协议的iOS模块化框架，同时它还支持URL路由和模块间通信机制。
 ## 安装
 ### cocoapods
 
