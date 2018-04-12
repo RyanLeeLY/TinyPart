@@ -148,7 +148,7 @@ TPROUTER_METHOD_EXPORT(action2, {
 ### URL路由
 * **配置configPlistFile**。```TinyPart.bundle/TinyPart.plist```是```context.configPlistFileName ```的默认路径，因此即使没有下面第二行代码也是OK的。
 
-```
+```Objective-C
 TPContext *context = [TPContext sharedContext];
 context.configPlistFileName = @"TinyPart.bundle/TinyPart.plist";
 [TinyPart sharedInstance].context = context;
@@ -211,6 +211,10 @@ TPNotificationCenter *center1 = [TestModule1 tp_notificationCenter];
 [center1 addObserver:self selector:@selector(testNotification:) name:@"report_notification_from_TestModule2" object:nil];
 ```
 
+## 参考项目
+[**BeeHive**](https://github.com/alibaba/BeeHive)
+
+[**ReactNative**](http://facebook.github.io/react-native/)
 
 ## 开源许可证
 TinyPart is available under the MIT license. See the [LICENSE](https://github.com/RyanLeeLY/TinyPart/blob/master/LICENSE) file for more info.
