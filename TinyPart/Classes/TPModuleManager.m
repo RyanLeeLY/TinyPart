@@ -145,7 +145,9 @@ NSInteger moduleSortFunction(id<TPModuleProtocol> obj1, id<TPModuleProtocol> obj
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     [[[TPModuleManager sharedInstance] allModules] enumerateObjectsUsingBlock:^(id<TPModuleProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [obj applicationWillTerminate:application];
+        if ([obj respondsToSelector:@selector(applicationWillTerminate:)]) {
+            [obj applicationWillTerminate:application];
+        }
     }];
 }
 
