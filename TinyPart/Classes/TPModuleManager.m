@@ -33,7 +33,16 @@
         return;
     }
     NSString *className = NSStringFromClass(clz);
-    self.modulesDict[className] = [[clz alloc] init];
+    if (![NSThread isMainThread]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self registerModule:clz];
+        });
+        return;
+    }
+    if (!self.modulesDict[className]) {
+        self.modulesDict[className] = [[clz alloc] init];
+    }
+
 }
 
 NSInteger moduleSortFunction(id<TPModuleProtocol> obj1, id<TPModuleProtocol> obj2, void *reverse) {
