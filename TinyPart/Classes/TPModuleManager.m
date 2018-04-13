@@ -143,7 +143,12 @@ NSInteger moduleSortFunction(id<TPModuleProtocol> obj1, id<TPModuleProtocol> obj
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     __block BOOL result = NO;
     [[[TPModuleManager sharedInstance] allModules] enumerateObjectsUsingBlock:^(id<TPModuleProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        result = [obj application:application openURL:url sourceApplication:sourceApplication annotation:annotation] || NO;
+        if ([obj respondsToSelector:@selector(application:openURL:sourceApplication:annotation:)]) {
+            if ([obj application:application openURL:url sourceApplication:sourceApplication annotation:annotation]) {
+                result = YES;
+                *stop = YES;
+            }
+        }
     }];
     return result;
 }
@@ -153,7 +158,12 @@ NSInteger moduleSortFunction(id<TPModuleProtocol> obj1, id<TPModuleProtocol> obj
     __block BOOL result = NO;
     if(@available(iOS 9.0, *)) {
         [[[TPModuleManager sharedInstance] allModules] enumerateObjectsUsingBlock:^(id<TPModuleProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            result = [obj application:app openURL:url options:options] || NO;
+            if ([obj respondsToSelector:@selector(application:openURL:options:)]) {
+                if ([obj application:app openURL:url options:options]) {
+                    result = YES;
+                    *stop = YES;
+                }
+            }
         }];
     }
     return result;
@@ -234,7 +244,10 @@ NSInteger moduleSortFunction(id<TPModuleProtocol> obj1, id<TPModuleProtocol> obj
     if(@available(iOS 8.0, *)) {
         [[[TPModuleManager sharedInstance] allModules] enumerateObjectsUsingBlock:^(id<TPModuleProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([obj respondsToSelector:@selector(application:continueUserActivity:restorationHandler:)]) {
-                result = [obj application:application continueUserActivity:userActivity restorationHandler:restorationHandler] || NO;
+                if ([obj application:application continueUserActivity:userActivity restorationHandler:restorationHandler]) {
+                    result = YES;
+                    *stop = YES;
+                }
             }
         }];
     }
@@ -246,7 +259,10 @@ NSInteger moduleSortFunction(id<TPModuleProtocol> obj1, id<TPModuleProtocol> obj
     if(@available(iOS 8.0, *)) {
         [[[TPModuleManager sharedInstance] allModules] enumerateObjectsUsingBlock:^(id<TPModuleProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([obj respondsToSelector:@selector(application:willContinueUserActivityWithType:)]) {
-                result = [obj application:application willContinueUserActivityWithType:userActivityType] || NO;
+                if ([obj application:application willContinueUserActivityWithType:userActivityType]) {
+                    result = YES;
+                    *stop = YES;
+                }
             }
         }];
     }
