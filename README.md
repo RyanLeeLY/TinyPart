@@ -5,7 +5,7 @@
 [![Gmail](https://img.shields.io/badge/Gmail-@liyaoxjtu2013-red.svg?style=flat)](mail://liyaoxjtu2013@gmail.com)
 [![Twitter](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/liyaoryan)
 
-TinyPart is an iOS modularization framework implemented by Ojective-C. It also support URL router and inter-module communication. [(中文文档)](https://github.com/RyanLeeLY/TinyPart/blob/master/README-zhCN.md)
+TinyPart is an iOS modularization framework implemented by Ojective-C. It also supports URL-routing and inter-module communication. [(中文文档)](https://github.com/RyanLeeLY/TinyPart/blob/master/README-zhCN.md)
 ## Installation
 ### cocoapods
 
