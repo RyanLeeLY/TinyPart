@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "TPServiceProtocol.h"
 
-#define TPRouter_AUTH_REQUIRE(...) \
+#define TPROUTER_AUTH_REQUIRE(...) \
 - (BOOL)authorizationBeforeAction:(NSString *)action { \
     static dispatch_once_t onceToken; \
     static NSSet *authRequireSet; \
