@@ -1,29 +1,29 @@
 # TinyPart
-TinyPart是一个由Objective-C编写的面向协议的iOS模块化框架，同时它还支持URL路由和模块间通信机制。
-## 安装
+TinyPart is an iOS modularization framework coding by Ojective-C. It also support URL router and inter-module communication. [中文文档](https://github.com/RyanLeeLY/TinyPart/blob/master/README-zhCN.md)
+## Installation
 ### cocoapods
 
 ```ruby
 pod 'TinyPart'
 ```
 
-## 特点
-* **面向协议**。TinyPart中模块和服务都是面向协议的。服务面向协议的好处在于对于接口维护比较友好，任何接口的变动在编译时都是可见的，但是大型项目有可能会面临大量需要维护的协议，这也是不可忽视的缺点。
+## Features
+* **Protocol-oriented** Modules and services in Tinypart are protocol-oriented. The advantage is that maintenance interface will be much more easier, and any interface changes are visible at compile time. However, large projects may face a large number of protocols that need to be maintained. This is a disadvantage that cannot be ignored.
 
-* **动态化**。TinyPart中模块和服务的注册都是在运行时完成的，可以根据具体需要调整模块的注册和启动时间，异步启动模块对于优化APP首屏加载时间会有帮助。
+* **Dynamic** The registration of modules and services in TinyPart is done at runtime. You can adjust the registration and startup time of the module according to specific needs. The asynchronous startup will help optimize the first-screen-loading of the APP.
 
-* **路由服务**。我们知道面向协议的服务虽然对于接口维护比较方便，但是模块间相互调用各自服务，是需要知道对方协议的，这样最后可能会导致所有的协议需要暴露给所有的模块。比如现在有10个模块每个模块有1个服务协议，在上述情况下每个模块需要知道另外9个模块的协议，这相当于每个协议都被@import了9次，所有协议总共将会被@import 9*10=90次，这对于想做完全代码隔离的模块化来说是个噩梦。通过路由服务则很好地平衡了模块间调用和依赖问题，顺便也解决了跨APP跳转的问题。
+* **Routing-service** We know that protocol-oriented services are convenient for maintaining interface. However, when modules call other's services, they need to know each other's protocols. In the end, all protocols may need to be exposed to all modules. For example, there are 10 modules and 1 service protocol per module. In the above case, each module needs to know the protocol of another 9 modules. This means that each protocol is imported 9 times, and all protocols will be imported 9*10=90 times in total, this is a nightmare for modularization who want code isolation. Routing-service is a good balance between the inter-module calls and dependencies, and by the way also solve the cross-APP jump problem.
 
-* **URL路由**。在路由基础上，只需要再增加简单的1到2行代码就可以实现通过APPScheme的URL路由机制。
+* **URL-routing** On the basis of routing-service, simply adding another one or two lines of code can implement the URL-routing through APPScheme.
 
-* **多级模块有向通信**。一般来说，完全去耦合的模块间通信方案大概是两种：URL和通知```NSNotification```。URL解决了模块间服务相互调用的问题，但是如果想要通过URL实现一个观察者模式则会变得非常复杂。这时候大家可能会偏向于选择通知，但是由于通知是全局性的，这样会导致任何一条通知可能会被APP内任何一个模块所使用，久而久之这些通知会变得难以维护。<br>所谓**多级模块有向通信**，则是在```NSNotification```基础上对通知的传播方向进行了限制，底层模块对上层模块的通知称为**广播**```Broadcast```，上层模块对底层模块或者同层模块的通知称为**上报**```Report```。这样做有两个好处：一方面更利于通知的维护，另一方面可以帮助我们划分模块层级，如果我们发现有一个模块需要向多个同级模块进行```Report```那么这个模块很有可能应该被划分到更底层的模块。
+* **Multi-level Directive Communication** In general, there are two ways of inter-module communication for decoupling: URL and notifications ```NSNotification```. URL solves the problem of inter-module services calling, but they may become very complicated if you want to implement an observer-pattern by URL. At this time, people may prefer to select notifications, but since the notifications are global, this will cause any one of the notifications can be used by any module in the APP. As time went by, these notifications will be difficult to maintain. <br>The so-called multi-level directive communication, is based on the ```NSNotification``` to limit the propagation direction of the notifications. The notification being dispatched from underlying modules to upper modules that called ```Broadcast```. The notification being dispatched from upper modules to underlying or same-level modules that called ```Report```. This has two advantages: on the one hand, more beneficial to the maintenance of the notification, on the other hand can help us to divide the module level. For example, if we find that a module needs to ```Report``` to so many modules, then this module should probably be divided into a lower-level modules.
 
-## 架构说明
-![架构图](https://github.com/RyanLeeLY/TinyPart/blob/master/TinyPart.jpeg)
+## Architecture
+![Architecture](https://github.com/RyanLeeLY/TinyPart/blob/master/TinyPart.jpeg)
 
-## 用法
-### 初始化
-* 继承 TPAppDelegate，初始化TPContext
+## Usage
+### Setup
+* AppDelegate inherits TPAppDelegate, and initialize the TPContext
 
 ```Objective-C
 #import "TinyPart.h"
@@ -47,8 +47,8 @@ pod 'TinyPart'
 @end
 ```
 
-### 模块Module
-* **定义并注册一个模块**
+### Module
+* **Defination And Registration**
 
 ```Objective-C
 #import "TinyPart.h"
@@ -57,13 +57,13 @@ pod 'TinyPart'
 @end
 
 @implementation TestModule1
-TP_MODULE_AUTO_REGISTER // 自动注册模块，动态注册模块
+TP_MODULE_AUTO_REGISTER // Module will be registered in "+load" method
 
-TP_MODULE_ASYNC         // 异步启动模块，优化开屏性能
+TP_MODULE_ASYNC         // Aysnc load
 
-TP_MODULE_PRIORITY(1)   // 模块启动优先级，优先级高的先启动
+TP_MODULE_PRIORITY(1)   // Priority of the module. The higher will be launched in higher priority.
 
-TP_MODULE_LEVEL(TPModuleLevelBasic)     // 模块级别：基础模块
+TP_MODULE_LEVEL(TPModuleLevelBasic)     // Level of the module
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     return YES;
@@ -84,8 +84,8 @@ TP_MODULE_LEVEL(TPModuleLevelBasic)     // 模块级别：基础模块
 @end
 ```
 
-### 服务Service用法
-* **定义并注册一个服务Service**。Service可自定义单例模式或多例模式。
+### Service
+* **Defination And Registration** Service can be singleton or multiple partterns。
 
 ```Objective-C
 #import "TPServiceProtocol.h"
@@ -98,22 +98,22 @@ TP_MODULE_LEVEL(TPModuleLevelBasic)     // 模块级别：基础模块
 @end
 
 @implementation TestModuleService1Imp
-TPSERVICE_AUTO_REGISTER(TestModuleService1) // 自动注册服务
+TPSERVICE_AUTO_REGISTER(TestModuleService1) // Service will be registered in "+load" method
 
 - (void)function1 {
     NSLog(@"%@", @"TestModuleService1 function1");
 }
 @end
 ```
-* **访问服务Sevice**
+* **Call Sevice**
 
 ```Objective-C
 id<TestModuleService1> service1 = [[TPServiceManager sharedInstance] serviceWithName:@"TestModuleService1"];
     [service1 function1];
 ```
 
-### 路由Router用法
-* **定义并注册一个路由Router**
+### Router
+* **Defination And Registration**
 
 ```Objective-C
 #import "TPRouter.h"
@@ -123,9 +123,9 @@ id<TestModuleService1> service1 = [[TPServiceManager sharedInstance] serviceWith
 #import "TinyPart.h"
 
 @implementation TestRouter
-TPROUTER_AUTO_REGISTER  // 自动注册路由
+TPROUTER_AUTO_REGISTER  // Router will be registered in "+load" method
 
-// APP身份验证，需要实现TPMediatorDelegate中的身份验证回调
+// Authentication required in APP. You also need to implement TPMediatorDelegate's method.
 TPRouter_AUTH_REQUIRE(@"action1", @"action2")
 
 TPROUTER_METHOD_EXPORT(action1, {
@@ -139,21 +139,22 @@ TPROUTER_METHOD_EXPORT(action2, {
 });
 @end
 ```
-* **使用路由Router**
+* **Open Router**
 
 ```Objective-C
 [[TPMediator sharedInstance] performAction:@"action1" router:@"Test" params:@{}];
 ```
 
-### URL路由
-* **配置configPlistFile**。```TinyPart.bundle/TinyPart.plist```是```context.configPlistFileName ```的默认路径，因此即使没有下面第二行代码也是OK的。
+### URL Routing
+* **Add A ConfigPlistFile** 
+```TinyPart.bundle/TinyPart.plist```is```context.configPlistFileName ```'s default value.
 
 ```Objective-C
 TPContext *context = [TPContext sharedContext];
 context.configPlistFileName = @"TinyPart.bundle/TinyPart.plist";
 [TinyPart sharedInstance].context = context;
 ```
-* **新建**```TinyPart.bundle/TinyPart.plist```，并注册一条**URL Scheme**
+* **New**```TinyPart.bundle/TinyPart.plist```, and add a **URL Scheme**
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -168,28 +169,28 @@ context.configPlistFileName = @"TinyPart.bundle/TinyPart.plist";
 </plist>
 ```
 
-* **定义一条URL路由规则**。在已有的```TestRouter```基础上，我们只需要新建一个```TPMediator+Test```的扩展。
+* **Defination of URL-routing** On the basic of```TestRouter```, we only need to do is creating file ```TPMediator+Test``` and add the codes like below.
 
 ```Objective-C
 @implementation TPMediator (Test)
 + (void)load {
-    // 声明TestRouter对应的Host
+    // The host "com.tinypart.test" corresponding to TestRouter
     TPURLHostForRouter(@"com.tinypart.test", TestRouter) // tinypart://com.tinypart.test
     
-    // 声明TestRouter中action1对应的Path
+	 // The path "/action1" corresponding to TestRouter's action1
     TPURLPathForActionForRouter(@"/action1", action1, TestRouter);  // tinypart://com.tinypart.test/action1
 }
 @end
 ```
-* **使用URL路由**
+* **Open URL**
 
 ```Objective-C
 NSURL *url = [NSURL URLWithString:@"tinypart://com.tinypart.test/action1?id=1&name=tinypart"];
 [[TPMediator sharedInstance] openURL:url];
 ```
 
-### 有向通信
-* **发送**。这里注意前面提到的，底层模块对上层模块的通知称为**广播**```Broadcast```，上层模块对底层模块或者同层模块的通知称为**上报**```Report```。模块级别分为**Basic、Middle、Topout**三个级别。
+### Directive Communication
+* **Send** Here's a note of what was mentioned above: The notification being dispatched from underlying modules to upper modules that called ```Broadcast```. The notification being dispatched from upper modules to underlying or same-level modules that called ```Report```. There are three levels **Basic、Middle、Topout** defined in TinyPart。
 
 ```Objective-C
 TPNotificationCenter *center2 = [TestModule2 tp_notificationCenter];
@@ -203,18 +204,18 @@ TPNotificationCenter *center2 = [TestModule2 tp_notificationCenter];
 }];
 ```
 
-* **接收**
+* **Receive**
 
 ```Objective-C
 TPNotificationCenter *center1 = [TestModule1 tp_notificationCenter];
-// Observer销毁后自动释放
+// Observer will be dealloc automatically
 [center1 addObserver:self selector:@selector(testNotification:) name:@"report_notification_from_TestModule2" object:nil];
 ```
 
-## 参考项目
+## Reference
 [**BeeHive**](https://github.com/alibaba/BeeHive)
 
 [**ReactNative**](http://facebook.github.io/react-native/)
 
-## 开源许可证
+## License
 TinyPart is available under the MIT license. See the [LICENSE](https://github.com/RyanLeeLY/TinyPart/blob/master/LICENSE) file for more info.
