@@ -61,6 +61,10 @@
     [[TPModuleManager sharedInstance] applicationDidReceiveMemoryWarning:application];
 }
 
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    [[TPModuleManager sharedInstance] application:application didRegisterUserNotificationSettings:notificationSettings];
+}
+
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     [[TPModuleManager sharedInstance] application:application didFailToRegisterForRemoteNotificationsWithError:error];
 }
@@ -79,6 +83,10 @@
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     [[TPModuleManager sharedInstance] application:application didReceiveLocalNotification:notification];
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
+    [[TPModuleManager sharedInstance] application:application handleActionWithIdentifier:identifier forLocalNotification:notification completionHandler:completionHandler];
 }
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000

@@ -199,6 +199,14 @@ NSInteger moduleSortFunction(id<TPModuleProtocol> obj1, id<TPModuleProtocol> obj
     }];
 }
 
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    [[[TPModuleManager sharedInstance] allModules] enumerateObjectsUsingBlock:^(id<TPModuleProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj respondsToSelector:@selector(application:didRegisterUserNotificationSettings:)]) {
+            [obj application:application didRegisterUserNotificationSettings:notificationSettings];
+        }
+    }];
+}
+
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     [[[TPModuleManager sharedInstance] allModules] enumerateObjectsUsingBlock:^(id<TPModuleProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj respondsToSelector:@selector(application:didFailToRegisterForRemoteNotificationsWithError:)]) {
@@ -235,6 +243,14 @@ NSInteger moduleSortFunction(id<TPModuleProtocol> obj1, id<TPModuleProtocol> obj
     [[[TPModuleManager sharedInstance] allModules] enumerateObjectsUsingBlock:^(id<TPModuleProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj respondsToSelector:@selector(application:didReceiveLocalNotification:)]) {
             [obj application:application didReceiveLocalNotification:notification];
+        }
+    }];
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)())completionHandler {
+    [[[TPModuleManager sharedInstance] allModules] enumerateObjectsUsingBlock:^(id<TPModuleProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj respondsToSelector:@selector(application:handleActionWithIdentifier:forLocalNotification:completionHandler:)]) {
+            [obj application:application handleActionWithIdentifier:identifier forLocalNotification:notification completionHandler:completionHandler];
         }
     }];
 }
