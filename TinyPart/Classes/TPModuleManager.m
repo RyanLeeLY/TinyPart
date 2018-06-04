@@ -79,6 +79,16 @@ NSInteger moduleSortFunction(id<TPModuleProtocol> obj1, id<TPModuleProtocol> obj
 }
 
 #pragma mark - UIApplicationDelegate
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    __block BOOL result = YES;
+    [[[TPModuleManager sharedInstance] allModules] enumerateObjectsUsingBlock:^(id<TPModuleProtocol>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj respondsToSelector:@selector(application:willFinishLaunchingWithOptions:)]) {
+            result = [obj application:application willFinishLaunchingWithOptions:launchOptions] && result;
+        }
+    }];
+    return result;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 100000
     if(@available(iOS 10.0, *)) {

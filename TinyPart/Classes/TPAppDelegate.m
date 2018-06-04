@@ -11,6 +11,10 @@
 #import "TPModuleManager.h"
 
 @implementation TPAppDelegate
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    return [[TPModuleManager sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     return [[TPModuleManager sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
