@@ -28,7 +28,7 @@
     id<TestModuleService3> service3 = [[TPServiceManager sharedInstance] serviceWithName:@"TestModuleService3"];
     [service3 function3];
     
-    [[TPMediator sharedInstance] performAction:@"action2" router:@"Test" params:@{}];
+    [[TPMediator sharedInstance] performAction:@"action2" router:@"Test" params:@{TPMediatorIgnoreAuthCheckParameterName: @(NO)}];
     NSURL *url = [NSURL URLWithString:@"tinypart://com.tinypart.test/action1?id=1&name=tinypart"];
     [[TPMediator sharedInstance] openURL:url];
     

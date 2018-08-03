@@ -38,7 +38,7 @@
 }
 
 static BOOL login = NO;
-- (BOOL)mediator:(TPMediator *)mediator checkAuthRetryPerformActionHandler:(void (^)(void))retryHandler {
+- (BOOL)mediator:(TPMediator *)mediator routerAction:(TPMediatorRouterActionModel *)routerAction checkAuthRetryPerformActionHandler:(void (^)(void))retryHandler {
     BOOL isLogin = login;
     [self checkLogin:^{
         if (!isLogin) {

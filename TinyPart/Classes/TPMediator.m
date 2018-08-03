@@ -11,6 +11,8 @@
 #import "TPRouter.h"
 #import "TinyPart.h"
 
+NSString * const TPMediatorIgnoreAuthCheckParameterName = @"TPMediatorIgnoreAuthCheckParameterName";
+
 @interface TPMediator ()
 @property (strong, nonatomic) NSMutableDictionary *nativeRouterHostDict;        // {host: routerName}
 @property (strong, nonatomic) NSMutableDictionary *nativeRouterActionPathDict;  // {routerName:{path:actionName}}
@@ -80,11 +82,16 @@
     NSString *routerName = TPRouterNameFromString(router);
     TPRouter *routerService = [[TPServiceManager sharedInstance] serviceWithName:routerName];
     BOOL needAuth = [routerService authorizationBeforeAction:action];
-    if (needAuth) {
+    BOOL ignore = [params[TPMediatorIgnoreAuthCheckParameterName] boolValue];
+    if (needAuth && !ignore) {
         NSLog(@"%@", @"Authorization required");
         __weak typeof (self) weakSelf = self;
-        if ([self.deleagate respondsToSelector:@selector(mediator:checkAuthRetryPerformActionHandler:)]) {
-            if (![self.deleagate mediator:self checkAuthRetryPerformActionHandler:^{
+        if ([self.deleagate respondsToSelector:@selector(mediator:routerAction:checkAuthRetryPerformActionHandler:)]) {
+            TPMediatorRouterActionModel *model = [[TPMediatorRouterActionModel alloc] init];
+            model.action = action;
+            model.router = router;
+            model.params = params;
+            if (![self.deleagate mediator:self routerAction:model checkAuthRetryPerformActionHandler:^{
                 [weakSelf performAction:action router:router params:params];
             }]) {
                 return nil;
@@ -163,4 +170,7 @@ static inline NSDictionary * TPDictionaryFromURLQueryString(NSString *query) {
     }
     return [params copy];
 }
+@end
+
+@implementation TPMediatorRouterActionModel
 @end

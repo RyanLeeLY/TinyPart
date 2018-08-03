@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @class TPMediator;
+@class TPMediatorRouterActionModel;
+
+extern NSString * const TPMediatorIgnoreAuthCheckParameterName;
 
 #define TPURLHostForRouter(host, routerClass) \
 [[TPMediator sharedInstance] addURLHost:host forRouter:[routerClass class]];
@@ -25,7 +28,13 @@ ClangPop
 
 @protocol TPMediatorDelegate <NSObject>
 @optional
-- (BOOL)mediator:(TPMediator *)mediator checkAuthRetryPerformActionHandler:(void(^)(void))retryHandler;
+- (BOOL)mediator:(TPMediator *)mediator routerAction:(TPMediatorRouterActionModel *)routerAction checkAuthRetryPerformActionHandler:(void(^)(void))retryHandler;
+@end
+
+@interface TPMediatorRouterActionModel : NSObject
+@property (copy, nonatomic) NSString *router;
+@property (copy, nonatomic) NSString *action;
+@property (copy, nonatomic) NSDictionary *params;
 @end
 
 @interface TPMediator : NSObject
