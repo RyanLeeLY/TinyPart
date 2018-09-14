@@ -44,11 +44,13 @@
     [[TPModuleManager sharedInstance] applicationWillTerminate:application];
 }
 
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 90000
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
    return [[TPModuleManager sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
 }
+#endif
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80400
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options {
     if (@available(iOS 9.0, *)) {
         return [[TPModuleManager sharedInstance] application:app openURL:url options:options];
@@ -73,9 +75,11 @@
     [[TPModuleManager sharedInstance] application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [[TPModuleManager sharedInstance] application:application didReceiveRemoteNotification:userInfo];
 }
+#endif
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     [[TPModuleManager sharedInstance] application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
@@ -105,6 +109,9 @@
 - (BOOL)application:(UIApplication *)application willContinueUserActivityWithType:(NSString *)userActivityType {
     return [[TPModuleManager sharedInstance] application:application willContinueUserActivityWithType:userActivityType];
 }
+#endif
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80200
 - (void)application:(UIApplication *)application handleWatchKitExtensionRequest:(nullable NSDictionary *)userInfo reply:(void(^)(NSDictionary * __nullable replyInfo))reply {
     if (@available(iOS 8.2, *)) {
         [[TPModuleManager sharedInstance] application:application handleWatchKitExtensionRequest:userInfo reply:reply];
@@ -116,6 +123,7 @@
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler  API_AVAILABLE(ios(10.0)) {
     [[TPModuleManager sharedInstance] userNotificationCenter:center willPresentNotification:notification withCompletionHandler:completionHandler];
 };
+
 
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)(void))completionHandler  API_AVAILABLE(ios(10.0)){
     [[TPModuleManager sharedInstance] userNotificationCenter:center didReceiveNotificationResponse:response withCompletionHandler:completionHandler];
