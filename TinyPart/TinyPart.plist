@@ -4,12 +4,12 @@
 <dict>
 	<key>ModuleClasses</key>
 	<array>
-		<string>TestModule3</string>
+		<string>TestModule</string>
 	</array>
 	<key>ServicesTable</key>
 	<dict>
-		<key>TestModuleService3</key>
-		<string>TestModuleService3Imp</string>
+		<key>TestModuleService1</key>
+		<string>TestModuleService1Imp</string>
 	</dict>
 	<key>RouterClasses</key>
 	<array>

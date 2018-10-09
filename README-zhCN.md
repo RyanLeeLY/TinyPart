@@ -61,10 +61,10 @@ pod 'TinyPart'
 ```Objective-C
 #import "TinyPart.h"
 
-@interface TestModule1 : NSObject <TPModuleProtocol>
+@interface TestModule : NSObject <TPModuleProtocol>
 @end
 
-@implementation TestModule1
+@implementation TestModule
 TP_MODULE_AUTO_REGISTER // 自动注册模块，动态注册模块
 
 TP_MODULE_ASYNC         // 异步启动模块，优化开屏性能
