@@ -40,12 +40,20 @@ pod 'TinyPart'
 
     [TPContext sharedContext].launchOptions = launchOptions;
     [TPContext sharedContext].application = application;
+    context.configPlistFileName = @"TinyPart.bundle/TinyPart.plist";
+    context.modulePlistFileName = @"TinyPart.bundle/TinyPart.plist";
+    context.servicePlistFileName = @"TinyPart.bundle/TinyPart.plist";
+    context.routerPlistFileName = @"TinyPart.bundle/TinyPart.plist";
     [TinyPart sharedInstance].context = [TPContext sharedContext];
     
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 @end
 ```
+
+* 新建plist文件'TinyPart.bundle/TinyPart.plist'
+
+![create_plist](https://github.com/RyanLeeLY/TinyPart/blob/master/Pics/create_plist.jpeg)
 
 ### 模块Module
 * **定义并注册一个模块**
@@ -84,6 +92,10 @@ TP_MODULE_LEVEL(TPModuleLevelBasic)     // 模块级别：基础模块
 @end
 ```
 
+如果没有使用`TP_MODULE_AUTO_REGISTER `自动注册宏的话，还需要将TestModule1加到`TinyPart.plist`配置文件中。
+
+![register_module](https://github.com/RyanLeeLY/TinyPart/blob/master/Pics/register_module.jpeg)
+
 ### 服务Service用法
 * **定义并注册一个服务Service**。Service可自定义单例模式或多例模式。
 
@@ -105,6 +117,11 @@ TPSERVICE_AUTO_REGISTER(TestModuleService1) // 自动注册服务
 }
 @end
 ```
+
+如果没有使用`TPSERVICE_AUTO_REGISTER `自动注册宏的话，还需要将TestModuleService1加到`TinyPart.plist`配置文件中。
+
+![register_service](https://github.com/RyanLeeLY/TinyPart/blob/master/Pics/register_service.jpeg)
+
 * **访问服务Sevice**
 
 ```Objective-C
@@ -139,6 +156,11 @@ TPROUTER_METHOD_EXPORT(action2, {
 });
 @end
 ```
+
+如果没有使用`TPROUTER_AUTO_REGISTER`自动注册宏的话，还需要将TestModuleService1加到`TinyPart.plist`配置文件中。
+
+![register_router](https://github.com/RyanLeeLY/TinyPart/blob/master/Pics/register_router.jpeg)
+
 * **使用路由Router**
 
 ```Objective-C
@@ -146,13 +168,7 @@ TPROUTER_METHOD_EXPORT(action2, {
 ```
 
 ### URL路由
-* **配置configPlistFile**。```TinyPart.bundle/TinyPart.plist```是```context.configPlistFileName ```的默认路径，因此即使没有下面第二行代码也是OK的。
 
-```Objective-C
-TPContext *context = [TPContext sharedContext];
-context.configPlistFileName = @"TinyPart.bundle/TinyPart.plist";
-[TinyPart sharedInstance].context = context;
-```
 * **新建**```TinyPart.bundle/TinyPart.plist```，并注册一条**URL Scheme**
 
 ```
