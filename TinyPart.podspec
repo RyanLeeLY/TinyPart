@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "TinyPart"
-  s.version      = "0.4.1"
+  s.version      = "1.0.0"
   s.summary      = "TinyPart Framework"
   s.description  = <<-DESC
                     TinyPart is a modular framework in iOS.
