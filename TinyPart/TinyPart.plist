@@ -8,8 +8,8 @@
 	</array>
 	<key>ServicesTable</key>
 	<dict>
-		<key>TestModuleService1</key>
-		<string>TestModuleService1Imp</string>
+		<key>TestModuleService3</key>
+		<string>TestModuleService3Imp</string>
 	</dict>
 	<key>RouterClasses</key>
 	<array>

@@ -27,10 +27,10 @@
     TPContext *context = [TPContext sharedContext];
     
     // DefaultFileName:@"TinyPart.bundle/TinyPart.plist";
-    context.configPlistFileName = @"xxx.bundle/xxx.plist";
-    context.modulePlistFileName = @"xxx.bundle/xxx.plist";
-    context.servicePlistFileName = @"xxx.bundle/xxx.plist";
-    context.routerPlistFileName = @"xxx.bundle/xxx.plist";
+    context.configPlistFileName = @"TinyPart.bundle/TinyPart.plist";
+    context.modulePlistFileName = @"TinyPart.bundle/TinyPart.plist";
+    context.servicePlistFileName = @"TinyPart.bundle/TinyPart.plist";
+    context.routerPlistFileName = @"TinyPart.bundle/TinyPart.plist";
     
     [TinyPart sharedInstance].context = context;
     

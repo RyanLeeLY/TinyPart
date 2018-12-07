@@ -10,7 +10,7 @@
 #import "TinyPart.h"
 
 @implementation TestRouter
-TPROUTER_AUTO_REGISTER  // 自动注册路由
+TPROUTER_AUTO_REGISTER(TestRouter)  // 自动注册路由
 
 // APP身份验证，需要实现TPMediatorDelegate中的身份验证回调
 TPROUTER_AUTH_REQUIRE(@"action1", @"action2")

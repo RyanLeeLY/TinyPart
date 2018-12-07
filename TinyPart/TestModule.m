@@ -9,7 +9,7 @@
 #import "TestModule.h"
 
 @implementation TestModule1
-TP_MODULE_AUTO_REGISTER // 自动注册模块，动态注册模块
+TPMODULE_AUTO_REGISTER(TestModule1) // 自动注册模块，动态注册模块
 
 TP_MODULE_ASYNC         // 异步启动模块，优化开屏性能
 
@@ -38,7 +38,7 @@ TP_MODULE_LEVEL(TPModuleLevelBasic)     // 模块级别：基础模块
 
 
 @implementation TestModule2
-TP_MODULE_AUTO_REGISTER
+TPMODULE_AUTO_REGISTER(TestModule2)
 
 TP_MODULE_ASYNC
 

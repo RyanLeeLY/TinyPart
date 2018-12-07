@@ -10,7 +10,7 @@
 #import "TinyPart.h"
 
 @implementation TestModuleService1Imp
-TPSERVICE_AUTO_REGISTER(TestModuleService1) // 自动注册服务
+TPSERVICE_AUTO_REGISTER(TestModuleService1, TestModuleService1Imp) // 自动注册服务
 
 - (void)function1 {
     NSLog(@"%@", @"TestModuleService1 function1");
@@ -18,7 +18,7 @@ TPSERVICE_AUTO_REGISTER(TestModuleService1) // 自动注册服务
 @end
 
 @implementation TestModuleService2Imp
-TPSERVICE_AUTO_REGISTER(TestModuleService2)
+TPSERVICE_AUTO_REGISTER(TestModuleService2, TestModuleService2Imp)
 
 + (BOOL)singleton {
     return YES;

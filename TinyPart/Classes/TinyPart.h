@@ -20,17 +20,29 @@
 #import <UserNotifications/UserNotifications.h>
 #endif
 
-#define TP_MODULE_AUTO_REGISTER \
-+ (void)load { \
-[[TinyPart sharedInstance] registerModule:[self class]];}
+#define TinyPartDATA(sectname) __attribute((used, section("__DATA,"#sectname" ")))
 
-#define TPSERVICE_AUTO_REGISTER(protocol_name) \
-+ (void)load { \
-    [[TinyPart sharedInstance] registerService:@protocol(protocol_name) impClass:[self class]];}
+#define TPMODULE_AUTO_REGISTER(name) \
+char * k##name##_mod TinyPartDATA(TinyPartModule) = ""#name"";
 
-#define TPROUTER_AUTO_REGISTER \
-+ (void)load { \
-[[TinyPart sharedInstance] addRouter:[self class]];}
+#define TPSERVICE_AUTO_REGISTER(servicename,impl) \
+char * k##servicename##_service TinyPartDATA(TinyPartService) = "{ \""#servicename"\" : \""#impl"\"}";
+
+#define TPROUTER_AUTO_REGISTER(name) \
+char * k##name##_router TinyPartDATA(TinyPartRouter) = ""#name"";
+
+//
+//#define TP_MODULE_AUTO_REGISTER \
+//+ (void)load { \
+//[[TinyPart sharedInstance] registerModule:[self class]];}
+//
+//#define TPSERVICE_AUTO_REGISTER(protocol_name) \
+//+ (void)load { \
+//    [[TinyPart sharedInstance] registerService:@protocol(protocol_name) impClass:[self class]];}
+//
+//#define TPROUTER_AUTO_REGISTER \
+//+ (void)load { \
+//[[TinyPart sharedInstance] addRouter:[self class]];}
 
 @interface TinyPart : NSObject
 @property (strong, nonatomic) TPContext *context;
