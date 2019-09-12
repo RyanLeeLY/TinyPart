@@ -5,4 +5,4 @@
 osx_image: xcode10.3
 
 language: objective-c
-script: xcodebuild -project TinyPart.xcworkspace -scheme TinyPartTests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+script: xcodebuild -project TinyPart.xcodeproj -scheme TinyPartTests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
