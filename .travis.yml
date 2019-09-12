@@ -3,7 +3,6 @@
 # * https://github.com/supermarin/xcpretty#usage
 
 osx_image: xcode10.3
+
 language: objective-c
-xcode_project: TinyPart.xcodeproj # path to your xcodeproj folder
-xcode_scheme: TinyPartTests
-xcode_destination: platform=iOS Simulator,OS=11.3,name=iPhone X
+script: xcodebuild -project TinyPart.xcworkspace -scheme TinyPartTests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
