@@ -4,6 +4,6 @@
 
 osx_image: xcode10.3
 language: objective-c
-xcode_project: TinyPart.xcodeproj # path to your xcodeproj folder
-xcode_scheme: TinyPart
+xcode_project: TinyPartTests.xcodeproj # path to your xcodeproj folder
+xcode_scheme: TinyPartTests
 xcode_destination: platform=iOS Simulator,OS=11.3,name=iPhone X

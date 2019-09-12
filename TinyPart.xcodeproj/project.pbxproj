@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2527BF6E2329EB4A00A3C707 /* TinyPartTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2527BF6D2329EB4A00A3C707 /* TinyPartTests.m */; };
 		255E317A2079E607002166CB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E31792079E607002166CB /* AppDelegate.m */; };
 		255E317D2079E607002166CB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255E317C2079E607002166CB /* ViewController.m */; };
 		255E31802079E607002166CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 255E317E2079E607002166CB /* Main.storyboard */; };
@@ -30,7 +31,20 @@
 		25D15728207DF46A00D60E92 /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D15727207DF46A00D60E92 /* ViewController2.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		2527BF702329EB4A00A3C707 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 255E316D2079E607002166CB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 255E31742079E607002166CB;
+			remoteInfo = TinyPart;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		2527BF6B2329EB4A00A3C707 /* TinyPartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinyPartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2527BF6D2329EB4A00A3C707 /* TinyPartTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TinyPartTests.m; sourceTree = "<group>"; };
+		2527BF6F2329EB4A00A3C707 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		255E31752079E607002166CB /* TinyPart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinyPart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		255E31782079E607002166CB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		255E31792079E607002166CB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -74,6 +88,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2527BF682329EB4A00A3C707 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		255E31722079E607002166CB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -84,10 +105,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2527BF6C2329EB4A00A3C707 /* TinyPartTests */ = {
+			isa = PBXGroup;
+			children = (
+				2527BF6D2329EB4A00A3C707 /* TinyPartTests.m */,
+				2527BF6F2329EB4A00A3C707 /* Info.plist */,
+			);
+			path = TinyPartTests;
+			sourceTree = "<group>";
+		};
 		255E316C2079E607002166CB = {
 			isa = PBXGroup;
 			children = (
 				255E31772079E607002166CB /* TinyPart */,
+				2527BF6C2329EB4A00A3C707 /* TinyPartTests */,
 				255E31762079E607002166CB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -96,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				255E31752079E607002166CB /* TinyPart.app */,
+				2527BF6B2329EB4A00A3C707 /* TinyPartTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -165,6 +197,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2527BF6A2329EB4A00A3C707 /* TinyPartTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2527BF742329EB4A00A3C707 /* Build configuration list for PBXNativeTarget "TinyPartTests" */;
+			buildPhases = (
+				2527BF672329EB4A00A3C707 /* Sources */,
+				2527BF682329EB4A00A3C707 /* Frameworks */,
+				2527BF692329EB4A00A3C707 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2527BF712329EB4A00A3C707 /* PBXTargetDependency */,
+			);
+			name = TinyPartTests;
+			productName = TinyPartTests;
+			productReference = 2527BF6B2329EB4A00A3C707 /* TinyPartTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		255E31742079E607002166CB /* TinyPart */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 255E318B2079E608002166CB /* Build configuration list for PBXNativeTarget "TinyPart" */;
@@ -191,6 +241,10 @@
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = yaoli;
 				TargetAttributes = {
+					2527BF6A2329EB4A00A3C707 = {
+						CreatedOnToolsVersion = 10.2;
+						TestTargetID = 255E31742079E607002166CB;
+					};
 					255E31742079E607002166CB = {
 						CreatedOnToolsVersion = 9.3;
 					};
@@ -210,11 +264,19 @@
 			projectRoot = "";
 			targets = (
 				255E31742079E607002166CB /* TinyPart */,
+				2527BF6A2329EB4A00A3C707 /* TinyPartTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2527BF692329EB4A00A3C707 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		255E31732079E607002166CB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -230,6 +292,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2527BF672329EB4A00A3C707 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2527BF6E2329EB4A00A3C707 /* TinyPartTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		255E31712079E607002166CB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -255,6 +325,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		2527BF712329EB4A00A3C707 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 255E31742079E607002166CB /* TinyPart */;
+			targetProxy = 2527BF702329EB4A00A3C707 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		255E317E2079E607002166CB /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -275,6 +353,49 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2527BF722329EB4A00A3C707 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L78C6AFK5E;
+				INFOPLIST_FILE = TinyPartTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yaoli.TinyPartTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TinyPart.app/TinyPart";
+			};
+			name = Debug;
+		};
+		2527BF732329EB4A00A3C707 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = L78C6AFK5E;
+				INFOPLIST_FILE = TinyPartTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yaoli.TinyPartTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TinyPart.app/TinyPart";
+			};
+			name = Release;
+		};
 		255E31892079E608002166CB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -397,7 +518,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = yaoli.TinyPart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yaoli.tinypart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -415,7 +536,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = yaoli.TinyPart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yaoli.tinypart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -424,6 +545,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2527BF742329EB4A00A3C707 /* Build configuration list for PBXNativeTarget "TinyPartTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2527BF722329EB4A00A3C707 /* Debug */,
+				2527BF732329EB4A00A3C707 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		255E31702079E607002166CB /* Build configuration list for PBXProject "TinyPart" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
