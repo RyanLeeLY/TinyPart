@@ -1,0 +1,9 @@
+# references:
+# * https://www.objc.io/issues/6-build-tools/travis-ci/
+# * https://github.com/supermarin/xcpretty#usage
+
+osx_image: xcode10.3
+language: objective-c
+xcode_project: TinyPart.xcodeproj # path to your xcodeproj folder
+xcode_scheme: TinyPart
+xcode_destination: platform=iOS Simulator,OS=11.3,name=iPhone X
