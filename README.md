@@ -1,4 +1,5 @@
 # TinyPart
+[![Build Status](https://travis-ci.com/RyanLeeLY/TinyPart.svg?branch=master)](https://travis-ci.com/RyanLeeLY/TinyPart)
 [![Platform](https://img.shields.io/cocoapods/p/TinyPart.svg?style=flat)](https://cocoapods.org/?q=tinypart)
 [![Version](https://img.shields.io/cocoapods/v/TinyPart.svg?style=flat)](https://cocoapods.org/?q=tinypart)
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/RyanLeeLY/TinyPart/blob/master/LICENSE)
